@@ -1,0 +1,613 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>派大涛·攀岩日记</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+:root{
+  --warm-white:#FAFAF8;--charcoal:#222;--sage:#7C9082;--sage-light:#A8BBA0;
+  --stone:#9A9A9A;--sand:#D4C5B2;--sand-light:#EDE8E0;--cream:#F5F2ED;
+  --bg:var(--warm-white);--bg2:#fff;--bg3:var(--cream);
+  --text:var(--charcoal);--text2:#555;--text3:var(--stone);
+  --accent:var(--sage);--accent-bg:rgba(124,144,130,.07);
+  --border:rgba(0,0,0,.06);--shadow-s:0 1px 8px rgba(0,0,0,.04);
+  --shadow-m:0 4px 24px rgba(0,0,0,.06);--shadow-l:0 12px 48px rgba(0,0,0,.08);
+  --serif:'Cormorant Garant',Georgia,'Noto Serif SC',serif;
+  --quote:'Lora','Cormorant Garant',Georgia,serif;
+  --sans:'Inter',-apple-system,'SF Pro Text','PingFang SC','Noto Sans SC',system-ui,sans-serif;
+  --mastered:var(--sage);--practicing:#C4A35A;--locked:var(--sand);
+}
+[data-theme="dark"]{
+  --warm-white:#141413;--charcoal:#EDE9E3;--cream:#1E1E1C;--sand-light:#2A2A28;
+  --bg:var(--warm-white);--bg2:#1A1A18;--bg3:var(--cream);
+  --text:var(--charcoal);--text2:#A09A92;--text3:#6B665E;
+  --border:rgba(255,255,255,.06);--shadow-s:0 1px 8px rgba(0,0,0,.2);
+  --shadow-m:0 4px 24px rgba(0,0,0,.3);--shadow-l:0 12px 48px rgba(0,0,0,.4);
+  --accent-bg:rgba(124,144,130,.1);
+}
+html{scroll-behavior:smooth;background:var(--bg);color:var(--text);
+  -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
+  font-family:var(--sans);font-size:16px;line-height:1.7;transition:background .5s,color .5s}
+body{min-height:100vh;overflow-x:hidden}
+img{max-width:100%;display:block}
+a{color:var(--accent);text-decoration:none}
+
+/* NAV */
+.nav{position:fixed;top:0;left:0;right:0;z-index:100;padding:0 32px;height:56px;
+  display:flex;align-items:center;justify-content:space-between;
+  background:transparent;transition:background .4s,backdrop-filter .4s}
+.nav.scrolled{background:rgba(250,250,248,.82);backdrop-filter:blur(20px) saturate(1.4);
+  -webkit-backdrop-filter:blur(20px) saturate(1.4);border-bottom:1px solid var(--border)}
+[data-theme="dark"] .nav.scrolled{background:rgba(20,20,19,.82)}
+.nav-brand{font-family:var(--serif);font-size:15px;font-weight:500;letter-spacing:.06em;
+  text-transform:uppercase;color:var(--text2)}
+.nav-right{display:flex;align-items:center;gap:28px}
+.nav-right a{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);font-weight:500;transition:color .2s}
+.nav-right a:hover{color:var(--text)}
+.theme-btn{width:28px;height:28px;border:none;background:none;cursor:pointer;color:var(--text3);
+  font-size:16px;display:flex;align-items:center;justify-content:center;transition:color .2s}
+.theme-btn:hover{color:var(--text)}
+
+/* COVER */
+.cover{min-height:100vh;display:flex;flex-direction:column;justify-content:center;align-items:center;
+  padding:80px 32px 60px;text-align:center;position:relative}
+.cover-eyebrow{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);
+  font-weight:500;margin-bottom:24px}
+.cover h1{font-family:var(--serif);font-size:clamp(42px,8vw,72px);font-weight:300;
+  letter-spacing:-.02em;line-height:1.08;margin-bottom:32px;color:var(--text)}
+.cover-line{width:40px;height:1px;background:var(--sand);margin:0 auto 32px}
+.cover-quote{font-family:var(--quote);font-size:clamp(17px,2.8vw,22px);font-style:italic;
+  color:var(--text2);line-height:1.7;max-width:520px;margin:0 auto 48px}
+.cover-meta{display:flex;gap:40px;justify-content:center;flex-wrap:wrap}
+.cover-meta-item{text-align:center}
+.cover-meta-num{font-family:var(--serif);font-size:36px;font-weight:300;color:var(--text);line-height:1}
+.cover-meta-label{font-size:11px;letter-spacing:.1em;text-transform:uppercase;color:var(--stone);margin-top:6px}
+.cover-scroll{position:absolute;bottom:32px;left:50%;transform:translateX(-50%);
+  font-size:11px;letter-spacing:.15em;text-transform:uppercase;color:var(--sand);
+  animation:float 3s ease-in-out infinite}
+@keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
+
+/* CHAPTER */
+.chapter{padding:100px 32px 80px;max-width:960px;margin:0 auto}
+.chapter-head{margin-bottom:48px}
+.chapter-num{font-size:11px;letter-spacing:.2em;text-transform:uppercase;color:var(--stone);
+  font-weight:500;margin-bottom:12px;display:block}
+.chapter-date{font-family:var(--serif);font-size:clamp(28px,5vw,44px);font-weight:300;
+  color:var(--text);letter-spacing:-.01em;margin-bottom:8px}
+.chapter-subtitle{font-size:15px;color:var(--text2);font-weight:400;letter-spacing:.01em}
+.chapter-divider{width:100%;height:1px;background:var(--border);margin:80px 0}
+
+/* PHOTO — Polaroid / Scrapbook Style */
+.photo-strip{display:flex;flex-wrap:wrap;gap:20px;margin:40px 0;align-items:flex-end;
+  justify-content:center;position:relative}
+.photo-frame{background:#fff;padding:7px 7px 30px;border-radius:2px;position:relative;
+  box-shadow:0 2px 12px rgba(0,0,0,.08),0 1px 3px rgba(0,0,0,.05);cursor:zoom-in;
+  transition:transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease;
+  max-width:260px;overflow:visible}
+[data-theme="dark"] .photo-frame{background:#2A2A28;box-shadow:0 2px 16px rgba(0,0,0,.35)}
+.photo-frame:hover{transform:scale(1.05) translateY(-4px);
+  box-shadow:0 8px 28px rgba(0,0,0,.12);z-index:10}
+.photo-frame img{width:100%;height:auto;display:block;border-radius:1px;
+  aspect-ratio:4/3;object-fit:cover}
+.photo-frame .photo-caption{position:absolute;bottom:8px;left:7px;right:7px;
+  font-size:11px;color:var(--stone);text-align:center;font-style:italic;
+  white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:0}
+
+/* Single photo — centered, slightly larger */
+.photo-frame.single{max-width:360px;margin:40px auto;display:block}
+
+/* Size variants for visual rhythm */
+.photo-frame.small{max-width:180px}
+.photo-frame.medium{max-width:240px}
+.photo-frame.large{max-width:280px}
+
+/* Caption row */
+.photo-caption-row{font-size:12px;color:var(--stone);margin-top:8px;font-style:italic;
+  letter-spacing:.01em;max-width:680px;text-align:center}
+
+/* CONTENT BLOCKS */
+.prose{max-width:680px;font-size:17px;line-height:1.85;color:var(--text2)}
+.prose p{margin-bottom:20px}
+.breakthrough{max-width:680px;margin:40px 0;padding:24px 0;border-top:1px solid var(--border)}
+.breakthrough-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;color:var(--sage);
+  font-weight:600;margin-bottom:10px}
+.breakthrough-text{font-family:var(--serif);font-size:clamp(22px,3.5vw,30px);font-weight:400;
+  line-height:1.35;color:var(--text)}
+
+/* QUOTE / FEELING */
+.quote-block{max-width:580px;margin:56px 0;padding:0}
+.quote-text{font-family:var(--quote);font-size:clamp(20px,3.2vw,26px);font-weight:400;
+  line-height:1.75;color:var(--text);font-style:normal;white-space:pre-wrap;word-break:break-word}
+.quote-mark{font-family:var(--serif);font-size:64px;line-height:1;color:var(--sand);margin-bottom:-8px;
+  user-select:none}
+
+/* SKILLS TAGS */
+.skills-row{display:flex;flex-wrap:wrap;gap:8px;margin:32px 0;max-width:680px}
+.skill-tag{font-size:12px;padding:6px 16px;border:1px solid var(--border);border-radius:24px;
+  color:var(--text2);font-weight:500;letter-spacing:.02em;background:var(--bg2);
+  transition:background .2s,border-color .2s}
+.skill-tag:hover{border-color:var(--sage);background:var(--accent-bg)}
+
+/* COACH SECTIONS */
+.coach-block{max-width:680px;margin:40px 0}
+.coach-label{font-size:10px;letter-spacing:.18em;text-transform:uppercase;font-weight:600;margin-bottom:12px}
+.coach-label.guidance-label{color:var(--sage)}
+.coach-label.feedback-label{color:var(--practicing)}
+.coach-label.goal-label{color:var(--stone)}
+.coach-text{font-size:15px;line-height:1.8;color:var(--text2);padding:20px 24px;
+  background:var(--bg3);border-radius:10px;border-left:2px solid var(--border)}
+.coach-text.guidance{border-left-color:var(--sage-light)}
+.coach-text.feedback{border-left-color:var(--practicing)}
+.coach-goal{font-size:15px;line-height:1.8;color:var(--text2);
+  padding:16px 24px;background:var(--accent-bg);border-radius:10px}
+
+/* collapsible guidance */
+.guidance-wrap{max-width:680px;margin:32px 0}
+.guidance-toggle{display:flex;align-items:center;gap:10px;width:100%;padding:14px 20px;border:1px dashed var(--sage-light);
+  background:var(--accent-bg);border-radius:10px;cursor:pointer;font-family:var(--sans);
+  font-size:13px;font-weight:500;color:var(--sage);letter-spacing:.04em;text-align:left;transition:background .2s}
+.guidance-toggle:hover{background:rgba(124,144,130,.12)}
+.guidance-toggle .chevron{margin-left:auto;transition:transform .3s;font-size:10px}
+.guidance-wrap.open .guidance-toggle .chevron{transform:rotate(180deg)}
+.guidance-body{max-height:0;overflow:hidden;transition:max-height .45s ease}
+.guidance-wrap.open .guidance-body{max-height:800px}
+.guidance-body .coach-text{margin-top:12px}
+
+/* STARS */
+.stars{display:flex;gap:4px;margin:24px 0}
+.star{width:8px;height:8px;border-radius:50%;background:var(--sand)}
+.star.on{background:var(--sage)}
+
+/* SKILL MAP */
+.skill-map{padding:100px 32px 60px;max-width:960px;margin:0 auto}
+.map-title{font-family:var(--serif);font-size:clamp(28px,5vw,40px);font-weight:300;
+  text-align:center;margin-bottom:12px;color:var(--text)}
+.map-sub{font-size:14px;color:var(--stone);text-align:center;margin-bottom:60px;letter-spacing:.04em}
+.map-category{background:var(--bg2);border:1px solid var(--border);border-radius:var(--radius);
+  padding:28px;margin-bottom:24px;box-shadow:var(--shadow-s)}
+.map-cat-head{display:flex;align-items:baseline;justify-content:space-between;margin-bottom:20px;
+  padding-bottom:12px;border-bottom:1px solid var(--border)}
+.map-cat-name{font-family:var(--serif);font-size:22px;font-weight:500;color:var(--text)}
+.map-cat-count{font-size:12px;color:var(--stone);letter-spacing:.06em}
+.map-group{margin-bottom:16px}
+.map-group:last-child{margin-bottom:0}
+.map-group-name{font-size:11px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);
+  font-weight:500;margin-bottom:10px}
+.map-items{display:flex;flex-wrap:wrap;gap:6px 16px}
+.map-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2)}
+.map-item.mastered{color:var(--text);font-weight:500}
+.map-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.map-dot.mastered{background:var(--mastered)}
+.map-dot.practicing{background:var(--practicing)}
+.map-dot.locked{background:var(--locked)}
+.map-legend{display:flex;gap:24px;justify-content:center;margin-bottom:48px;flex-wrap:wrap}
+.legend{display:flex;align-items:center;gap:6px;font-size:12px;color:var(--stone)}
+
+/* LIGHTBOX */
+.lightbox{position:fixed;inset:0;z-index:1000;background:rgba(20,20,19,.94);display:none;
+  align-items:center;justify-content:center;opacity:0;transition:opacity .35s}
+.lightbox.active{display:flex;opacity:1}
+.lightbox img{max-width:92vw;max-height:88vh;object-fit:contain;border-radius:6px}
+.lb-close{position:fixed;top:20px;right:24px;width:40px;height:40px;border:none;
+  background:rgba(255,255,255,.08);border-radius:50%;cursor:pointer;color:#fff;font-size:20px;
+  display:flex;align-items:center;justify-content:center;transition:background .2s}
+.lb-close:hover{background:rgba(255,255,255,.16)}
+
+/* BTT */
+.btt{position:fixed;bottom:28px;right:28px;width:40px;height:40px;border-radius:50%;border:1px solid var(--border);
+  background:var(--bg2);cursor:pointer;font-size:14px;color:var(--text3);
+  display:flex;align-items:center;justify-content:center;
+  opacity:0;transform:translateY(16px);pointer-events:none;transition:all .3s;z-index:50}
+.btt.show{opacity:1;transform:translateY(0);pointer-events:auto}
+.btt:hover{border-color:var(--sage);color:var(--sage)}
+
+/* FOOTER */
+.footer{text-align:center;padding:80px 32px 48px}
+.footer-text{font-size:12px;color:var(--stone);letter-spacing:.08em}
+
+/* SCROLL REVEAL */
+.reveal{opacity:0;transform:translateY(28px);transition:opacity .7s cubic-bezier(.25,.46,.45,.94),
+  transform .7s cubic-bezier(.25,.46,.45,.94)}
+.reveal.vis{opacity:1;transform:translateY(0)}
+.reveal-delay-1{transition-delay:.1s}
+.reveal-delay-2{transition-delay:.2s}
+.reveal-delay-3{transition-delay:.3s}
+
+/* ===== ART DIRECTOR ENHANCEMENTS ===== */
+
+/* 3. Reading Progress Bar */
+.progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--sage);z-index:200;
+  width:0%;transition:width .1s linear;pointer-events:none}
+
+/* 2. Film Grain Texture */
+body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;
+  background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  background-size:128px 128px}
+[data-theme="dark"] body::after{opacity:.025}
+
+/* 1. Cover Watermark */
+.cover-watermark{position:absolute;font-family:var(--serif);font-size:clamp(200px,35vw,380px);
+  font-weight:300;color:var(--text);opacity:.03;line-height:1;top:50%;left:50%;
+  transform:translate(-50%,-50%);pointer-events:none;user-select:none;z-index:0;
+  letter-spacing:-.04em}
+
+/* 4. Cover Meta Dividers */
+.cover-meta-divider{width:1px;height:32px;background:var(--sand);opacity:.5;align-self:center}
+
+/* 5. Chapter Watermark Number */
+.chapter-watermark{position:absolute;top:-20px;right:-10px;font-family:var(--serif);
+  font-size:clamp(120px,18vw,200px);font-weight:300;color:var(--text);opacity:.025;
+  line-height:1;pointer-events:none;user-select:none;z-index:0;letter-spacing:-.03em}
+.chapter{position:relative;overflow:hidden}
+
+/* 6. Vertical Date Label */
+.chapter-date-vert{writing-mode:vertical-rl;text-orientation:mixed;position:absolute;
+  top:100px;left:8px;font-family:var(--sans);font-size:10px;letter-spacing:.15em;
+  text-transform:uppercase;color:var(--stone);opacity:.2;font-weight:400;z-index:0}
+@media(max-width:1100px){.chapter-date-vert{display:none}}
+
+/* 7. Alternating Chapter Backgrounds */
+.chapter:nth-child(even){background:var(--bg3)}
+.chapter:nth-child(even)::before{content:'';position:absolute;inset:0;
+  background:linear-gradient(180deg,var(--bg) 0%,transparent 80px,transparent calc(100% - 80px),var(--bg) 100%);
+  pointer-events:none;z-index:0}
+.chapter>*{position:relative;z-index:1}
+
+/* 8. Decorative Chapter Divider */
+.chapter-divider{background:none;height:auto;margin:0;padding:48px 0;display:flex;
+  align-items:center;justify-content:center}
+.chapter-divider::before{content:'✦';font-size:10px;color:var(--sand);letter-spacing:1em;
+  opacity:.6}
+
+/* 9. Chapter Left Accent Line */
+.chapter-accent{position:absolute;top:80px;bottom:80px;left:0;width:2px;
+  background:linear-gradient(180deg,transparent,var(--sage-light),transparent);opacity:.3}
+
+/* 10. Drop Cap for Feeling */
+.feeling-text::first-letter{font-family:var(--serif);font-size:3.2em;float:left;
+  line-height:.85;margin-right:8px;margin-top:4px;font-weight:400;color:var(--accent)}
+
+/* 11. Quote Decoration Gradients */
+.quote-block{position:relative}
+.quote-block::before{content:'';position:absolute;top:-24px;left:0;width:60px;height:1px;
+  background:linear-gradient(90deg,var(--sage-light),transparent)}
+.quote-block::after{content:'';position:absolute;bottom:-24px;left:0;width:40px;height:1px;
+  background:linear-gradient(90deg,var(--sand),transparent)}
+
+/* 12. Feeling Left Emphasis Line */
+.quote-block{padding-left:28px;border-left:3px solid var(--sage-light)}
+.quote-mark{margin-left:-28px}
+
+/* 13. Feeling Text Size Boost */
+.quote-text{font-size:clamp(22px,3.4vw,28px)}
+
+/* 14. Staggered Polaroid Reveal */
+.photo-strip .photo-frame{opacity:0;transition:opacity .5s ease,transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease}
+.photo-strip.vis .photo-frame{opacity:1}
+.photo-strip.vis .photo-frame:nth-child(1){transition-delay:0s}
+.photo-strip.vis .photo-frame:nth-child(2){transition-delay:.1s}
+.photo-strip.vis .photo-frame:nth-child(3){transition-delay:.2s}
+.photo-strip.vis .photo-frame:nth-child(4){transition-delay:.3s}
+.photo-strip.vis .photo-frame:nth-child(5){transition-delay:.38s}
+
+/* 15. (stagger integrated into #14 above) */
+
+/* 16. Lightbox Scale Entrance */
+.lightbox img{transform:scale(.92);transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .35s}
+.lightbox.active img{transform:scale(1)}
+
+/* 17. Polaroid Soft Shadow (replaces vignette) */
+/* shadow already handled by .photo-frame box-shadow */
+
+/* 18. Mastered Skill Subtle Glow */
+@keyframes masteredPulse{0%,100%{opacity:.6}50%{opacity:1}}
+.map-dot.mastered{animation:masteredPulse 3s ease-in-out infinite}
+
+/* 19. Skill Tag Hover Elastic */
+.skill-tag{transition:background .2s,border-color .2s,transform .3s cubic-bezier(.34,1.56,.64,1)}
+.skill-tag:hover{transform:scale(1.06)}
+
+/* 20. Map Category Hover Lift */
+.map-category{transition:transform .4s ease,box-shadow .4s ease}
+.map-category:hover{transform:translateY(-3px);box-shadow:var(--shadow-m)}
+
+/* 21. Nav Link Underline Animation */
+.nav-right a{position:relative;overflow:hidden}
+.nav-right a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;
+  background:var(--sage);transition:width .35s ease}
+.nav-right a:hover::after{width:100%}
+
+/* 22. Smooth Theme Transition (enhance existing) */
+html{transition:background .5s ease,color .5s ease}
+.nav,.nav-brand,.nav-right a,.theme-btn,.chapter,.chapter-head,.chapter-date,.chapter-subtitle,
+.chapter-num,.breakthrough-text,.quote-text,.quote-mark,.coach-text,.coach-goal,.coach-label,
+.skill-tag,.map-category,.map-cat-name,.map-item,.guidance-toggle,.cover-eyebrow,.cover h1,
+.cover-quote,.cover-meta-num,.cover-meta-label,.footer-text,.prose{
+  transition:background-color .45s ease,color .45s ease,border-color .45s ease}
+
+/* 23. Breakthrough Text Enhancement */
+.breakthrough-text{background:linear-gradient(135deg,var(--text) 0%,var(--sage) 100%);
+  -webkit-background-clip:text;-webkit-text-fill-color:transparent;
+  background-clip:text}
+[data-theme="dark"] .breakthrough-text{background:linear-gradient(135deg,var(--text) 0%,var(--sage-light) 100%);
+  -webkit-background-clip:text;background-clip:text}
+
+/* 24. Footer Decorative Line */
+.footer{position:relative}
+.footer::before{content:'';display:block;width:60px;height:1px;background:var(--sand);
+  margin:0 auto 40px;opacity:.5}
+
+/* 25. Cover Scroll Indicator Enhancement */
+.cover-scroll{display:flex;flex-direction:column;align-items:center;gap:8px}
+.cover-scroll::after{content:'';width:1px;height:24px;background:linear-gradient(180deg,var(--sand),transparent);
+  animation:scrollLine 2s ease-in-out infinite}
+@keyframes scrollLine{0%{opacity:0;transform:scaleY(0);transform-origin:top}
+  50%{opacity:1;transform:scaleY(1)}100%{opacity:0;transform:scaleY(1)}}
+
+/* RESPONSIVE */
+@media(max-width:768px){
+  .nav{padding:0 20px;height:48px}
+  .nav-right{gap:16px}
+  .cover{padding:72px 24px 48px}
+  .cover-meta{gap:24px}
+  .chapter{padding:64px 20px 48px}
+  .chapter-divider{margin:48px 0}
+  .quote-text{font-size:19px}
+  .photo-strip{gap:14px;justify-content:center}
+  .photo-frame{max-width:45%!important}
+  .photo-frame.single{max-width:80%!important}
+  .skill-map{padding:64px 20px 40px}
+  .prose{font-size:16px}
+}
+@media(max-width:480px){
+  .cover h1{font-size:36px}
+  .chapter-date{font-size:24px}
+  .cover-meta-num{font-size:28px}
+  .photo-frame{max-width:100%!important}
+  .photo-frame.single{max-width:100%!important}
+}
+</style>
+</head>
+<body>
+<div class="progress-bar" id="progress"></div>
+
+<nav class="nav" id="nav">
+  <span class="nav-brand">Climbing Journal</span>
+  <div class="nav-right">
+    <a href="#chapters">日记</a>
+    <a href="#skill-map">成长</a>
+    <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9789;</button>
+  </div>
+</nav>
+
+<section class="cover">
+  <div class="cover-watermark">IV</div>
+  <div class="cover-eyebrow reveal">Climbing Journal &middot; 2026</div>
+  <h1 class="reveal reveal-delay-1">派大涛·攀岩日记</h1>
+  <div class="cover-line reveal reveal-delay-2"></div>
+  <p class="cover-quote reveal reveal-delay-2">"快乐快乐，不是说自己多强，<br>是那种一点点探索一点点进步的掌控感。"</p>
+  <div class="cover-meta reveal reveal-delay-3">
+    <div class="cover-meta-item"><div class="cover-meta-num">4</div><div class="cover-meta-label">训练</div></div>
+    <div class="cover-meta-divider"></div>
+    <div class="cover-meta-item"><div class="cover-meta-num">8</div><div class="cover-meta-label">天</div></div>
+    <div class="cover-meta-divider"></div>
+    <div class="cover-meta-item"><div class="cover-meta-num">18</div><div class="cover-meta-label">技能</div></div>
+  </div>
+  <div class="cover-scroll">Scroll</div>
+</section>
+
+<div id="chapters"></div>
+
+<section class="skill-map" id="skill-map">
+  <div class="map-title reveal">成长地图</div>
+  <div class="map-sub reveal">基于《攀岩是个技术活》技术体系</div>
+  <div class="map-legend reveal">
+    <span class="legend"><span class="map-dot mastered"></span>已掌握</span>
+    <span class="legend"><span class="map-dot practicing"></span>练习中</span>
+    <span class="legend"><span class="map-dot locked"></span>未解锁</span>
+  </div>
+  <div id="map-container"></div>
+</section>
+
+<div class="footer"><span class="footer-text">Climbing Journal &middot; 记录每一次向上</span></div>
+
+<div class="lightbox" id="lb" onclick="closeLB()">
+  <button class="lb-close" onclick="closeLB()">&times;</button>
+  <img id="lb-img" src="" alt="">
+</div>
+
+<button class="btt" id="btt" onclick="window.scrollTo({top:0})">&#8593;</button>
+
+<script>
+var P="./";
+
+var D=[
+{
+  date:"2026-07-04",num:"IV",title:"进入新领域",
+  skills:["侧身转胯/Side-in","初级动态","初级三脚猫","动态跳跃/Dyno","重心侧摆"],
+  level:3,
+  guidance:"第三课：外侧缘踩点与拧转技术（Twist-lock）。做侧身时支撑脚不能用大脚趾内侧正踩，要换用攀岩鞋外侧缘（Outer Edge）切入踩实脚点。通过脚踝和膝盖的内扣，带动整个胯部完成深度的'拧转'，像弹簧一样把身体向上推。练习：选V1或5-6级微角度/斜壁线路，每一步都必须用攀岩鞋大脚趾外侧的橡胶边缘切入踩实脚点；在一攀中完成6次'拧转起身'并在抓点瞬间定格2秒——证明是靠脚蹬和胯拧上去的，而不是靠手拉或惯性荡上去的。",
+  feedback:"右胯已经很好地侧向贴近岩壁，右腿蹬地伸展，顺畅地借力延伸抓到了上方的黄色大把点。身体拉长，手臂伸直挂点，不仅节省了上肢力量，还腾出了巨大的身体延展空间。侧身转胯已清晰感知并相对熟练掌握。",
+  feeling:"侧身发力转胯这次都有比较清晰的感知，相对熟练掌握了。如图所示，右边胯顶起后，伸手碰到上侧手点。\n\n另外今天跟着岩馆公开课学习了初级动态。有了进入新的领域的感觉，可以正身发力把屁股顶起来，蹬上去，也尝试了初级三脚猫，把左腿旋转带惯性，横向跳到比较远的脚点。\n\n感觉攀岩进入了一个小小的新的领域，那种技术难度和乐趣也上了一个台阶。当然因为选的都是比较基础的岩点，发力和跳跃的动作都不大，但还是感觉到那种腾空飞起来的感觉太酷了。\n\n快乐快乐，不是说自己多强，是那种一点点探索一点点进步的掌控感。",
+  goal:"练习外侧缘踩点与拧转技术（Twist-lock），结合动态感觉与静态脚法，继续精进侧身发力",
+  photos:["1000077049.jpg"],
+  captions:["右胯顶起，手臂伸直，侧身姿态"],
+  breakthrough:"攀岩进入了一个新的领域——那种腾空飞起来的感觉太酷了。"
+},
+{
+  date:"2026-07-03",num:"III",title:"难度7突破受阻",
+  skills:["转胯侧身/Side-in"],
+  level:2,
+  guidance:"第二课纠错专项：侧身技术与精准换脚。当岩壁开始倾斜或手点方向偏向一侧时，正面贴墙会让膝盖顶住岩壁、重心后倾、手指抓引力倍增。此时必须转动骨盆，让身体一侧的侧面（髋部和肩膀）贴近岩壁，用攀岩鞋外侧缘侧踩岩点延长触及范围，彻底释放手指压力。换脚练习'顺切换脚'——严禁两只脚在岩点上乱踩相撞，必须用空着的那只脚精准地把正在承重的脚'切'下来。在5-7号线路上强制每步移动都做一次左右转胯，完全靠胯部的侧向转动把重心运过去。",
+  feedback:null,
+  feeling:"今天爬了一个多小时，简单试了下侧身，感觉有点不得要领，好像是能侧过身，但没有发力的感觉，可能跟找的路线不太对也有关系。这个技术可能有个教练带着选路线，指导一下更有感觉。\n\n另外今天试了下几条难度7的线路，都好难，好几次都完全成功不了，蛮挫败。拍图问你怎么爬呢，你又说的乱七八糟，哎，体验太差了。\n\n现在就是6以下的感觉没啥难度，但太少，7以上的，又始终突破不了，玩不下去。\n\n有没有那种能打开局面的动作，下次课安排一下吧",
+  goal:"要一个能打开局面的动作",
+  photos:["1000077004.jpg","1000077005.jpg"],
+  captions:["BANANA+ BOULDERING 线路","岩馆全景 · BALANCE BOUNDING"],
+  breakthrough:"6以下的感觉没啥难度，但太少，7以上的，又始终突破不了。"
+},
+{
+  date:"2026-06-30",num:"II",title:"第二次攀岩",
+  skills:["直臂挂","重心下移","下肢发力移动","换手换脚","横移","重心平移","动态借力"],
+  level:2,
+  guidance:"第一课：基础站姿结构与重心转移。核心原则——'直臂挂、低头看、踩实再起'。在直壁（垂直墙）上选择手点脚点都很大的简单线路练习：利用骨骼和肌腱的自然悬挂承受体重，通过膝盖外展（青蛙蹲姿）让骨盆贴近岩壁，把身体大部分重量垂直向下传递到脚尖。用攀岩鞋前端精准踩在岩点上并向下发力踩实，保持双膝外展让胯部贴近岩壁，利用腿部力量向上站起，手臂保持伸直只负责平衡。每组连续移动15-20步，确保每一攀手臂都是直的。",
+  feedback:"建立直臂挂墙意识，体会骨骼承重。换手换脚与重心平移。刷完新手区（难度7以下），拿下网红平移线。解包红色摆动线路。",
+  feeling:"第二次攀岩。重点学习了直挂手臂和重心下移，通过下肢发力移动。还和公开课教练学习了换手换脚，还是收获满满的。目前可以把岩馆新手区的路线都刷了一遍了，基本难度7以下的线路都没问题了。\n\n图一图二是新手区，来回横着也爬了几次，挺有感觉了。图三这个是个抖音网红路线，也刷下来啦，有一个动作是要把重心平移过去，手也够右边的点，比较有感觉。\n\n相应的手臂没有那么酸了，但是手指磨的痛的厉害，尤其是试了下图四这种倾斜墙壁，可太疼了。然后膝盖因为一次平移没太弄稳，磨了皮，第一次挂彩了，还好不严重。\n\n再记录下这个红色线路，挺有意思的，需要把身体摆过去，我说不清是什么技巧，总之有点难，试了几次才成功，蛮有意思",
+  goal:"下次学一个新技能 & 挑战8号难度的线",
+  photos:["1000076853.jpg","1000076854.jpg","1000076855.jpg","1000076856.jpg","1000076857.jpg"],
+  captions:["新手区 · 红色岩点直壁","新手区另一侧","网红平移线路","倾斜墙壁 · 黑色岩壁","第一次挂彩的膝盖"],
+  breakthrough:"基本难度7以下的线路都没问题了——手臂没有那么酸了。"
+},
+{
+  date:"2026-06-27",num:"I",title:"第一次攀岩",
+  skills:["安全落地"],
+  level:1,
+  guidance:null,
+  feedback:null,
+  feeling:"纯新手体验，学习了安全落地相关，手脚靠本能硬上，上完巨疼",
+  goal:null,
+  photos:[],
+  captions:[],
+  breakthrough:"手脚靠本能硬上，上完巨疼。"
+}
+];
+
+var ST=[
+{name:"脚法",icon:"\u{1F9B6}",items:[
+  {g:"基础踩点",s:[["脚尖内侧踩点","m"],["脚尖外侧踩点","p"],["脚尖正踩","p"],["边缘脚法","p"],["摩擦 Smearing","l"]]},
+  {g:"换脚 & 交叉脚",s:[["换脚（预留式）","p"],["换脚（切入式）","l"],["交叉脚（内交叉）","l"],["交叉脚（外交叉）","l"]]},
+  {g:"上高脚",s:[["基础上高脚","l"],["内侧上高脚","l"],["手脚同点上高脚","l"],["同侧上高脚","l"]]},
+  {g:"高级脚法",s:[["挂脚 Heel Hook","l"],["勾脚 Toe Hook","l"],["折膝 Drop Knee","l"],["背腿 Flagging","l"],["锁膝 Knee Bar","l"]]}
+]},
+{name:"身体控制",icon:"\u{1F9D8}",items:[
+  {g:"基础姿势",s:[["金字塔结构","m"],["三点固定","m"],["重心下沉","m"],["手臂伸直","p"],["正身动作","m"]]},
+  {g:"重心控制",s:[["重心转移","p"],["横移","p"],["下肢发力移动","p"],["对角线攀爬","l"]]},
+  {g:"侧身技术",s:[["侧身转胯 Side-in","m"],["外侧缘踩点","p"],["拧转 Twist-lock","p"],["重心侧摆","p"]]}
+]},
+{name:"动态能力",icon:"\u{1F680}",items:[
+  {g:"基础动态",s:[["动态借力","p"],["动态移动","p"],["三脚猫 Cypher","p"],["动态腾跃 Dyno","p"]]},
+  {g:"进阶动态",s:[["短程腾跃","l"],["平衡动态","l"],["横向腾跃","l"],["单脚腾跃","l"],["单边腾跃","l"]]},
+  {g:"综合派系",s:[["着陆 Landing","l"],["跑 Running","l"],["三连抓 Triple Clutch","l"]]}
+]},
+{name:"手法技术",icon:"\u{1F91A}",items:[
+  {g:"基础抓握",s:[["抓 Jug","m"],["压 Open Hand","p"],["抠 Crimp","l"],["捏 Pinch","l"]]},
+  {g:"进阶手法",s:[["侧拉 Side Pull","l"],["反提 Undercling","l"],["扒 Sloper","l"],["抠指洞 Pocket","l"]]},
+  {g:"换手 & 交叉手",s:[["换手","p"],["交叉手（上交叉）","l"],["交叉手（下交叉）","l"]]},
+  {g:"对抗发力",s:[["侧身对抗 Layback","l"],["翻墙 Mantling","l"],["Figure 4","l"]]}
+]},
+{name:"保护与安全",icon:"\u{1F6E1}\uFE0F",items:[
+  {g:"基础安全",s:[["安全落地","m"],["攀石保护 Spotting","l"]]},
+  {g:"绳索保护",s:[["顶绳保护","l"],["先锋保护","l"],["动态保护","l"]]}
+]}
+];
+
+function fmtDate(d){var p=d.split('-');return p[0]+'\u5E74'+parseInt(p[1])+'\u6708'+parseInt(p[2])+'\u65E5'}
+function starDots(lv){var h='';for(var i=0;i<5;i++)h+='<span class="star'+(i<lv?' on':'')+'"></span>';return h}
+
+function renderPhotos(t){
+  if(!t.photos.length)return '';
+  var sizes=['medium','large','small','medium','large'];
+  if(t.photos.length===1){
+    var cap=t.captions[0]?'<div class="photo-caption">'+t.captions[0]+'</div>':'';
+    return '<div class="photo-frame single reveal" onclick="openLB(\''+P+t.photos[0]+'\')">'
+      +'<img src="'+P+t.photos[0]+'" alt="" loading="lazy">'+cap+'</div>';
+  }
+  var frames=t.photos.map(function(p,i){
+    var sz=sizes[i%sizes.length];
+    var cap=t.captions[i]?'<div class="photo-caption">'+t.captions[i]+'</div>':'';
+    return '<div class="photo-frame '+sz+'" onclick="openLB(\''+P+p+'\')">'
+      +'<img src="'+P+p+'" alt="" loading="lazy">'+cap+'</div>';
+  }).join('');
+  return '<div class="photo-strip reveal">'+frames+'</div>';
+}
+
+function renderChapters(){
+  var el=document.getElementById('chapters');
+  var html='';
+  for(var i=0;i<D.length;i++){
+    var t=D[i];
+    var guidanceHtml='';
+    if(t.guidance){
+      guidanceHtml='<div class="guidance-wrap reveal" id="gw'+i+'">'
+        +'<button class="guidance-toggle" onclick="document.getElementById(\'gw'+i+'\').classList.toggle(\'open\')">'
+        +'<span>\u{1F4D6} \u8BFE\u524D\u6559\u5B66\u6307\u5BFC</span><span class="chevron">\u25BE</span></button>'
+        +'<div class="guidance-body"><div class="coach-text guidance">'+t.guidance+'</div></div></div>';
+    }
+    var fbHtml=t.feedback?'<div class="coach-block reveal"><div class="coach-label feedback-label">\u{1F3AF} \u6559\u7EC3\u53CD\u9988</div><div class="coach-text feedback">'+t.feedback+'</div></div>':'';
+    var goalHtml=t.goal?'<div class="coach-block reveal"><div class="coach-label goal-label">\u4E0B\u4E00\u6B21\u76EE\u6807</div><div class="coach-goal">'+t.goal+'</div></div>':'';
+
+    html+='<article class="chapter">'
+      +'<div class="chapter-watermark">'+t.num+'</div>'
+      +'<div class="chapter-accent"></div>'
+      +'<div class="chapter-date-vert">'+t.date.replace(/-/g,'.')+'</div>'
+      +'<div class="chapter-head reveal">'
+      +'<span class="chapter-num">Chapter '+t.num+'</span>'
+      +'<div class="chapter-date">'+fmtDate(t.date)+'</div>'
+      +'<div class="chapter-subtitle">'+t.title+'</div>'
+      +'</div>'
+      +renderPhotos(t)
+      +'<div class="breakthrough reveal"><div class="breakthrough-label">\u4ECA\u65E5\u7A81\u7834</div><div class="breakthrough-text">'+t.breakthrough+'</div></div>'
+      +'<div class="quote-block reveal"><div class="quote-mark">\u201C</div><div class="quote-text feeling-text">'+t.feeling+'</div></div>'
+      +'<div class="reveal"><div class="skills-row">'+t.skills.map(function(s){return '<span class="skill-tag">'+s+'</span>'}).join('')+'</div><div class="stars">'+starDots(t.level)+'</div></div>'
+      +guidanceHtml
+      +fbHtml
+      +goalHtml
+      +(i<D.length-1?'<div class="chapter-divider"></div>':'')
+      +'</article>';
+  }
+  el.innerHTML=html;
+}
+
+function renderMap(){
+  var el=document.getElementById('map-container');
+  el.innerHTML=ST.map(function(cat){
+    var total=0,mastered=0;
+    cat.items.forEach(function(g){g.s.forEach(function(s){total++;if(s[1]==='m')mastered++})});
+    var groups=cat.items.map(function(g){
+      var items=g.s.map(function(s){
+        var cls=s[1]==='m'?'mastered':s[1]==='p'?'practicing':'locked';
+        return '<span class="map-item '+cls+'"><span class="map-dot '+cls+'"></span>'+s[0]+'</span>';
+      }).join('');
+      return '<div class="map-group"><div class="map-group-name">'+g.g+'</div><div class="map-items">'+items+'</div></div>';
+    }).join('');
+    return '<div class="map-category reveal"><div class="map-cat-head"><span class="map-cat-name">'+cat.icon+' '+cat.name+'</span><span class="map-cat-count">'+mastered+'/'+total+'</span></div>'+groups+'</div>';
+  }).join('');
+}
+
+function openLB(src){var lb=document.getElementById('lb');document.getElementById('lb-img').src=src;lb.classList.add('active');document.body.style.overflow='hidden'}
+function closeLB(){document.getElementById('lb').classList.remove('active');document.body.style.overflow=''}
+document.addEventListener('keydown',function(e){if(e.key==='Escape')closeLB()});
+
+function toggleTheme(){
+  var h=document.documentElement,d=h.getAttribute('data-theme')==='dark';
+  h.setAttribute('data-theme',d?'light':'dark');
+  document.querySelector('.theme-btn').innerHTML=d?'&#9789;':'&#9788;';
+}
+
+function initScroll(){
+  var nav=document.getElementById('nav');
+  var btt=document.getElementById('btt');
+  var prog=document.getElementById('progress');
+  window.addEventListener('scroll',function(){
+    nav.classList.toggle('scrolled',window.scrollY>60);
+    btt.classList.toggle('show',window.scrollY>500);
+    var pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
+    prog.style.width=Math.min(pct,100)+'%';
+  },{passive:true});
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
+  var photoObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');photoObs.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.photo-strip').forEach(function(el){photoObs.observe(el)});
+}
+
+renderChapters();
+renderMap();
+requestAnimationFrame(function(){initScroll()});
+</script>
+</body>
+</html>
