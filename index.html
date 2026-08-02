@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>派大涛·攀岩日记</title>
+<title>派大涛·攀岩修炼</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garant:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Lora:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
@@ -47,8 +47,9 @@ a{color:var(--accent);text-decoration:none}
 .nav-brand{font-family:var(--serif);font-size:15px;font-weight:500;letter-spacing:.06em;
   text-transform:uppercase;color:var(--text2)}
 .nav-right{display:flex;align-items:center;gap:28px}
-.nav-right a{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);font-weight:500;transition:color .2s}
+.nav-right a{font-size:12px;letter-spacing:.08em;text-transform:uppercase;color:var(--text3);font-weight:500;transition:color .2s;cursor:pointer}
 .nav-right a:hover{color:var(--text)}
+.nav-right a.active{color:var(--accent)}
 .theme-btn{width:28px;height:28px;border:none;background:none;cursor:pointer;color:var(--text3);
   font-size:16px;display:flex;align-items:center;justify-content:center;transition:color .2s}
 .theme-btn:hover{color:var(--text)}
@@ -72,6 +73,84 @@ a{color:var(--accent);text-decoration:none}
   animation:float 3s ease-in-out infinite}
 @keyframes float{0%,100%{transform:translateX(-50%) translateY(0)}50%{transform:translateX(-50%) translateY(6px)}}
 
+/* TAB BAR */
+.tab-bar{position:sticky;top:56px;z-index:90;display:flex;justify-content:center;gap:0;
+  padding:0 32px;background:var(--bg);border-bottom:1px solid var(--border);transition:background .45s}
+.tab-btn{padding:14px 28px;font-size:12px;letter-spacing:.1em;text-transform:uppercase;font-weight:500;
+  color:var(--text3);background:none;border:none;border-bottom:2px solid transparent;
+  cursor:pointer;transition:all .3s;font-family:var(--sans)}
+.tab-btn:hover{color:var(--text2)}
+.tab-btn.active{color:var(--accent);border-bottom-color:var(--accent)}
+
+/* TAB PANELS */
+.tab-panel{display:none}
+.tab-panel.active{display:block}
+
+/* ===== CURRICULUM STYLES ===== */
+.curr{padding:80px 32px 60px;max-width:960px;margin:0 auto}
+.curr-header{text-align:center;margin-bottom:64px}
+.curr-title{font-family:var(--serif);font-size:clamp(28px,5vw,40px);font-weight:300;margin-bottom:8px}
+.curr-sub{font-size:14px;color:var(--stone);letter-spacing:.04em;margin-bottom:40px}
+
+/* Dimension overview */
+.curr-dims{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;max-width:680px;margin:0 auto 20px}
+.curr-dim{text-align:center}
+.curr-dim-label{font-size:11px;letter-spacing:.08em;color:var(--stone);margin-bottom:6px;text-transform:uppercase}
+.curr-dim-bar{height:4px;border-radius:2px;background:var(--border);overflow:hidden;margin-bottom:4px}
+.curr-dim-fill{height:100%;border-radius:2px;transition:width .6s ease}
+.curr-dim-stars{font-size:10px;color:var(--stone);letter-spacing:2px}
+
+/* Stage cards */
+.curr-stage{background:var(--bg2);border:1px solid var(--border);border-radius:12px;padding:28px 28px 24px;
+  margin-bottom:24px;box-shadow:var(--shadow-s);transition:transform .4s,box-shadow .4s}
+.curr-stage:hover{transform:translateY(-2px);box-shadow:var(--shadow-m)}
+.curr-stage.current{border-color:var(--practicing);border-width:1.5px}
+.curr-stage.locked-stage{opacity:.55}
+.curr-stage-head{display:flex;align-items:center;gap:12px;margin-bottom:6px;flex-wrap:wrap}
+.curr-stage-badge{width:30px;height:30px;border-radius:50%;display:flex;align-items:center;justify-content:center;
+  font-size:13px;font-weight:600;color:#fff;flex-shrink:0}
+.curr-stage-name{font-family:var(--serif);font-size:20px;font-weight:500}
+.curr-badge{font-size:10px;padding:3px 10px;border-radius:10px;letter-spacing:.06em;font-weight:500}
+.curr-badge.done{background:var(--accent-bg);color:var(--mastered)}
+.curr-badge.now{background:rgba(196,163,90,.1);color:var(--practicing)}
+.curr-stage-desc{font-size:13px;color:var(--stone);margin-bottom:16px;line-height:1.6}
+.curr-groups{display:flex;flex-direction:column;gap:14px;margin-bottom:16px}
+.curr-group-name{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);
+  font-weight:500;margin-bottom:8px}
+.curr-items{display:flex;flex-wrap:wrap;gap:6px 16px}
+.curr-item{display:flex;align-items:center;gap:8px;font-size:13px;color:var(--text2);position:relative;cursor:default}
+.curr-item.mastered{color:var(--text);font-weight:500}
+.curr-item-dot{width:7px;height:7px;border-radius:50%;flex-shrink:0}
+.curr-item-date{font-size:10px;color:var(--stone);margin-left:2px}
+.curr-item-diary{font-size:10px;color:var(--accent);margin-left:4px;cursor:pointer;opacity:.7;transition:opacity .2s}
+.curr-item-diary:hover{opacity:1}
+
+/* Stage criteria */
+.curr-criteria{border-top:1px solid var(--border);padding-top:14px;margin-top:4px}
+.curr-criteria-label{font-size:10px;letter-spacing:.12em;text-transform:uppercase;color:var(--stone);
+  font-weight:500;margin-bottom:6px}
+.curr-criteria-text{font-size:13px;color:var(--text2);line-height:1.6}
+.curr-time{font-size:11px;color:var(--stone);margin-top:6px;font-style:italic}
+
+/* Current focus */
+.curr-focus{background:var(--bg3);border:1px solid var(--border);border-radius:12px;padding:28px;margin-top:32px}
+.curr-focus-title{font-family:var(--serif);font-size:20px;font-weight:500;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.curr-focus-list{display:flex;flex-direction:column;gap:14px}
+.curr-focus-item{display:flex;gap:12px;align-items:flex-start}
+.curr-focus-tag{font-size:10px;padding:2px 8px;border-radius:4px;font-weight:600;letter-spacing:.04em;flex-shrink:0;margin-top:2px}
+.curr-focus-tag.p0{background:rgba(124,144,130,.12);color:var(--mastered)}
+.curr-focus-tag.p1{background:rgba(196,163,90,.12);color:var(--practicing)}
+.curr-focus-tag.p2{background:var(--border);color:var(--stone)}
+.curr-focus-name{font-size:14px;font-weight:500;margin-bottom:2px}
+.curr-focus-drill{font-size:13px;color:var(--text2);line-height:1.5}
+
+/* Signals */
+.curr-signals{margin-top:32px;display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.curr-signal{background:var(--bg2);border:1px solid var(--border);border-radius:8px;padding:14px 16px}
+.curr-signal-emoji{font-size:16px;margin-bottom:4px}
+.curr-signal-text{font-size:12px;color:var(--text2);line-height:1.5}
+.curr-signal-label{font-size:11px;font-weight:500;color:var(--text);margin-bottom:2px}
+
 /* CHAPTER */
 .chapter{padding:100px 32px 80px;max-width:960px;margin:0 auto}
 .chapter-head{margin-bottom:48px}
@@ -82,7 +161,7 @@ a{color:var(--accent);text-decoration:none}
 .chapter-subtitle{font-size:15px;color:var(--text2);font-weight:400;letter-spacing:.01em}
 .chapter-divider{width:100%;height:1px;background:var(--border);margin:80px 0}
 
-/* PHOTO — Polaroid / Scrapbook Style */
+/* PHOTO */
 .photo-strip{display:flex;flex-wrap:wrap;gap:20px;margin:40px 0;align-items:flex-end;
   justify-content:center;position:relative}
 .photo-frame{background:#fff;padding:7px 7px 30px;border-radius:2px;position:relative;
@@ -97,16 +176,10 @@ a{color:var(--accent);text-decoration:none}
 .photo-frame .photo-caption{position:absolute;bottom:8px;left:7px;right:7px;
   font-size:11px;color:var(--stone);text-align:center;font-style:italic;
   white-space:nowrap;overflow:hidden;text-overflow:ellipsis;margin-top:0}
-
-/* Single photo — centered, slightly larger */
 .photo-frame.single{max-width:360px;margin:40px auto;display:block}
-
-/* Size variants for visual rhythm */
 .photo-frame.small{max-width:180px}
 .photo-frame.medium{max-width:240px}
 .photo-frame.large{max-width:280px}
-
-/* Caption row */
 .photo-caption-row{font-size:12px;color:var(--stone);margin-top:8px;font-style:italic;
   letter-spacing:.01em;max-width:680px;text-align:center}
 
@@ -146,7 +219,6 @@ a{color:var(--accent);text-decoration:none}
 .coach-goal{font-size:15px;line-height:1.8;color:var(--text2);
   padding:16px 24px;background:var(--accent-bg);border-radius:10px}
 
-/* collapsible guidance */
 .guidance-wrap{max-width:680px;margin:32px 0}
 .guidance-toggle{display:flex;align-items:center;gap:10px;width:100%;padding:14px 20px;border:1px dashed var(--sage-light);
   background:var(--accent-bg);border-radius:10px;cursor:pointer;font-family:var(--sans);
@@ -219,74 +291,46 @@ a{color:var(--accent);text-decoration:none}
 .reveal-delay-3{transition-delay:.3s}
 
 /* ===== ART DIRECTOR ENHANCEMENTS ===== */
-
-/* 3. Reading Progress Bar */
 .progress-bar{position:fixed;top:0;left:0;height:2px;background:var(--sage);z-index:200;
   width:0%;transition:width .1s linear;pointer-events:none}
-
-/* 2. Film Grain Texture */
 body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;opacity:.035;
   background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
   background-size:128px 128px}
 [data-theme="dark"] body::after{opacity:.025}
-
-/* 1. Cover Watermark */
 .cover-watermark{position:absolute;font-family:var(--serif);font-size:clamp(200px,35vw,380px);
   font-weight:300;color:var(--text);opacity:.03;line-height:1;top:50%;left:50%;
   transform:translate(-50%,-50%);pointer-events:none;user-select:none;z-index:0;
   letter-spacing:-.04em}
-
-/* 4. Cover Meta Dividers */
 .cover-meta-divider{width:1px;height:32px;background:var(--sand);opacity:.5;align-self:center}
-
-/* 5. Chapter Watermark Number */
 .chapter-watermark{position:absolute;top:-20px;right:-10px;font-family:var(--serif);
   font-size:clamp(120px,18vw,200px);font-weight:300;color:var(--text);opacity:.025;
   line-height:1;pointer-events:none;user-select:none;z-index:0;letter-spacing:-.03em}
 .chapter{position:relative;overflow:hidden}
-
-/* 6. Vertical Date Label */
 .chapter-date-vert{writing-mode:vertical-rl;text-orientation:mixed;position:absolute;
   top:100px;left:8px;font-family:var(--sans);font-size:10px;letter-spacing:.15em;
   text-transform:uppercase;color:var(--stone);opacity:.2;font-weight:400;z-index:0}
 @media(max-width:1100px){.chapter-date-vert{display:none}}
-
-/* 7. Alternating Chapter Backgrounds */
 .chapter:nth-child(even){background:var(--bg3)}
 .chapter:nth-child(even)::before{content:'';position:absolute;inset:0;
   background:linear-gradient(180deg,var(--bg) 0%,transparent 80px,transparent calc(100% - 80px),var(--bg) 100%);
   pointer-events:none;z-index:0}
 .chapter>*{position:relative;z-index:1}
-
-/* 8. Decorative Chapter Divider */
 .chapter-divider{background:none;height:auto;margin:0;padding:48px 0;display:flex;
   align-items:center;justify-content:center}
 .chapter-divider::before{content:'✦';font-size:10px;color:var(--sand);letter-spacing:1em;
   opacity:.6}
-
-/* 9. Chapter Left Accent Line */
 .chapter-accent{position:absolute;top:80px;bottom:80px;left:0;width:2px;
   background:linear-gradient(180deg,transparent,var(--sage-light),transparent);opacity:.3}
-
-/* 10. Drop Cap for Feeling */
 .feeling-text::first-letter{font-family:var(--serif);font-size:3.2em;float:left;
   line-height:.85;margin-right:8px;margin-top:4px;font-weight:400;color:var(--accent)}
-
-/* 11. Quote Decoration Gradients */
 .quote-block{position:relative}
 .quote-block::before{content:'';position:absolute;top:-24px;left:0;width:60px;height:1px;
   background:linear-gradient(90deg,var(--sage-light),transparent)}
 .quote-block::after{content:'';position:absolute;bottom:-24px;left:0;width:40px;height:1px;
   background:linear-gradient(90deg,var(--sand),transparent)}
-
-/* 12. Feeling Left Emphasis Line */
 .quote-block{padding-left:28px;border-left:3px solid var(--sage-light)}
 .quote-mark{margin-left:-28px}
-
-/* 13. Feeling Text Size Boost */
 .quote-text{font-size:clamp(22px,3.4vw,28px)}
-
-/* 14. Staggered Polaroid Reveal */
 .photo-strip .photo-frame{opacity:0;transition:opacity .5s ease,transform .35s cubic-bezier(.34,1.56,.64,1),box-shadow .3s ease}
 .photo-strip.vis .photo-frame{opacity:1}
 .photo-strip.vis .photo-frame:nth-child(1){transition-delay:0s}
@@ -294,55 +338,32 @@ body::after{content:'';position:fixed;inset:0;z-index:9999;pointer-events:none;o
 .photo-strip.vis .photo-frame:nth-child(3){transition-delay:.2s}
 .photo-strip.vis .photo-frame:nth-child(4){transition-delay:.3s}
 .photo-strip.vis .photo-frame:nth-child(5){transition-delay:.38s}
-
-/* 15. (stagger integrated into #14 above) */
-
-/* 16. Lightbox Scale Entrance */
 .lightbox img{transform:scale(.92);transition:transform .4s cubic-bezier(.22,1,.36,1),opacity .35s}
 .lightbox.active img{transform:scale(1)}
-
-/* 17. Polaroid Soft Shadow (replaces vignette) */
-/* shadow already handled by .photo-frame box-shadow */
-
-/* 18. Mastered Skill Subtle Glow */
 @keyframes masteredPulse{0%,100%{opacity:.6}50%{opacity:1}}
 .map-dot.mastered{animation:masteredPulse 3s ease-in-out infinite}
-
-/* 19. Skill Tag Hover Elastic */
 .skill-tag{transition:background .2s,border-color .2s,transform .3s cubic-bezier(.34,1.56,.64,1)}
 .skill-tag:hover{transform:scale(1.06)}
-
-/* 20. Map Category Hover Lift */
 .map-category{transition:transform .4s ease,box-shadow .4s ease}
 .map-category:hover{transform:translateY(-3px);box-shadow:var(--shadow-m)}
-
-/* 21. Nav Link Underline Animation */
 .nav-right a{position:relative;overflow:hidden}
 .nav-right a::after{content:'';position:absolute;bottom:-2px;left:0;width:0;height:1px;
   background:var(--sage);transition:width .35s ease}
 .nav-right a:hover::after{width:100%}
-
-/* 22. Smooth Theme Transition (enhance existing) */
 html{transition:background .5s ease,color .5s ease}
 .nav,.nav-brand,.nav-right a,.theme-btn,.chapter,.chapter-head,.chapter-date,.chapter-subtitle,
 .chapter-num,.breakthrough-text,.quote-text,.quote-mark,.coach-text,.coach-goal,.coach-label,
 .skill-tag,.map-category,.map-cat-name,.map-item,.guidance-toggle,.cover-eyebrow,.cover h1,
 .cover-quote,.cover-meta-num,.cover-meta-label,.footer-text,.prose{
   transition:background-color .45s ease,color .45s ease,border-color .45s ease}
-
-/* 23. Breakthrough Text Enhancement */
 .breakthrough-text{background:linear-gradient(135deg,var(--text) 0%,var(--sage) 100%);
   -webkit-background-clip:text;-webkit-text-fill-color:transparent;
   background-clip:text}
 [data-theme="dark"] .breakthrough-text{background:linear-gradient(135deg,var(--text) 0%,var(--sage-light) 100%);
   -webkit-background-clip:text;background-clip:text}
-
-/* 24. Footer Decorative Line */
 .footer{position:relative}
 .footer::before{content:'';display:block;width:60px;height:1px;background:var(--sand);
   margin:0 auto 40px;opacity:.5}
-
-/* 25. Cover Scroll Indicator Enhancement */
 .cover-scroll{display:flex;flex-direction:column;align-items:center;gap:8px}
 .cover-scroll::after{content:'';width:1px;height:24px;background:linear-gradient(180deg,var(--sand),transparent);
   animation:scrollLine 2s ease-in-out infinite}
@@ -363,6 +384,11 @@ html{transition:background .5s ease,color .5s ease}
   .photo-frame.single{max-width:80%!important}
   .skill-map{padding:64px 20px 40px}
   .prose{font-size:16px}
+  .curr{padding:48px 20px 40px}
+  .curr-dims{grid-template-columns:repeat(2,1fr);gap:12px}
+  .curr-signals{grid-template-columns:1fr}
+  .curr-stage{padding:20px 18px 18px}
+  .tab-btn{padding:12px 16px;font-size:11px}
 }
 @media(max-width:480px){
   .cover h1{font-size:36px}
@@ -370,6 +396,7 @@ html{transition:background .5s ease,color .5s ease}
   .cover-meta-num{font-size:28px}
   .photo-frame{max-width:100%!important}
   .photo-frame.single{max-width:100%!important}
+  .curr-dims{grid-template-columns:repeat(2,1fr)}
 }
 </style>
 </head>
@@ -377,18 +404,19 @@ html{transition:background .5s ease,color .5s ease}
 <div class="progress-bar" id="progress"></div>
 
 <nav class="nav" id="nav">
-  <span class="nav-brand">Climbing Journal</span>
+  <span class="nav-brand">Climbing Path</span>
   <div class="nav-right">
-    <a href="#chapters">日记</a>
-    <a href="#skill-map">成长</a>
+    <a onclick="switchTab('curriculum')" id="nav-curriculum" class="active">课程</a>
+    <a onclick="switchTab('diary')" id="nav-diary">日记</a>
+    <a onclick="switchTab('diary');setTimeout(function(){document.getElementById('skill-map').scrollIntoView({behavior:'smooth'})},100)">成长</a>
     <button class="theme-btn" onclick="toggleTheme()" aria-label="Toggle theme">&#9789;</button>
   </div>
 </nav>
 
 <section class="cover">
   <div class="cover-watermark">X</div>
-  <div class="cover-eyebrow reveal">Climbing Journal &middot; 2026</div>
-  <h1 class="reveal reveal-delay-1">派大涛·攀岩日记</h1>
+  <div class="cover-eyebrow reveal">Climbing Path &middot; 2026</div>
+  <h1 class="reveal reveal-delay-1">派大涛·攀岩修炼</h1>
   <div class="cover-line reveal reveal-delay-2"></div>
   <p class="cover-quote reveal reveal-delay-2">"快乐快乐，不是说自己多强，<br>是那种一点点探索一点点进步的掌控感。"</p>
   <div class="cover-meta reveal reveal-delay-3">
@@ -401,20 +429,32 @@ html{transition:background .5s ease,color .5s ease}
   <div class="cover-scroll">Scroll</div>
 </section>
 
-<div id="chapters"></div>
+<div class="tab-bar" id="tab-bar">
+  <button class="tab-btn active" onclick="switchTab('curriculum')" id="tb-curriculum">课程体系</button>
+  <button class="tab-btn" onclick="switchTab('diary')" id="tb-diary">攀岩日记</button>
+</div>
 
-<section class="skill-map" id="skill-map">
-  <div class="map-title reveal">成长地图</div>
-  <div class="map-sub reveal">基于《攀岩是个技术活》技术体系</div>
-  <div class="map-legend reveal">
-    <span class="legend"><span class="map-dot mastered"></span>已掌握</span>
-    <span class="legend"><span class="map-dot practicing"></span>练习中</span>
-    <span class="legend"><span class="map-dot locked"></span>未解锁</span>
-  </div>
-  <div id="map-container"></div>
-</section>
+<!-- ===== CURRICULUM TAB ===== -->
+<div class="tab-panel active" id="panel-curriculum">
+  <div class="curr" id="curriculum-view"></div>
+</div>
 
-<div class="footer"><span class="footer-text">Climbing Journal &middot; 记录每一次向上</span></div>
+<!-- ===== DIARY TAB ===== -->
+<div class="tab-panel" id="panel-diary">
+  <div id="chapters"></div>
+  <section class="skill-map" id="skill-map">
+    <div class="map-title reveal">成长地图</div>
+    <div class="map-sub reveal">基于《攀岩技术教本详细图解》技术体系</div>
+    <div class="map-legend reveal">
+      <span class="legend"><span class="map-dot mastered"></span>已掌握</span>
+      <span class="legend"><span class="map-dot practicing"></span>练习中</span>
+      <span class="legend"><span class="map-dot locked"></span>未解锁</span>
+    </div>
+    <div id="map-container"></div>
+  </section>
+</div>
+
+<div class="footer"><span class="footer-text">Climbing Path &middot; 抓·撐·轉·跳，向上生长</span></div>
 
 <div class="lightbox" id="lb" onclick="closeLB()">
   <button class="lb-close" onclick="closeLB()">&times;</button>
@@ -578,6 +618,206 @@ var ST=[
 ]}
 ];
 
+/* ===== CURRICULUM DATA ===== */
+var CUR=[
+{id:1,name:"\u5730\u57fa",color:"#7C9082",dims:["\u6293","\u6490"],status:"done",
+ desc:"\u5EFA\u7ACB\u57FA\u7840\u7AD9\u59FF\u3001\u91CD\u5FC3\u63A7\u5236\u548C\u5B89\u5168\u610F\u8BC6",
+ groups:[
+  {n:"\u5B89\u5168\u57FA\u7840",items:[{n:"\u5B89\u5168\u843D\u5730",s:"m",d:"06-27"}]},
+  {n:"\u57FA\u7840\u5E73\u8861",items:[
+    {n:"\u76F4\u81C2\u639B",s:"m",d:"06-30"},{n:"\u91CD\u5FC3\u4E0B\u79FB",s:"m",d:"06-30"},
+    {n:"\u4E0B\u80A2\u53D1\u529B\u79FB\u52A8",s:"m",d:"06-30"},{n:"\u6362\u624B\u6362\u811A",s:"m",d:"06-30"},
+    {n:"\u6A2A\u79FB",s:"m",d:"06-30"},{n:"\u91CD\u5FC3\u5E73\u79FB",s:"m",d:"06-30"}]},
+  {n:"\u52A8\u6001\u521D\u4F53\u9A8C",items:[{n:"\u52A8\u6001\u501F\u529B",s:"m",d:"07-04"}]}
+ ],
+ criteria:"\u5237\u5B8C\u65B0\u624B\u533A\uFF08\u96BE\u5EA67\u4EE5\u4E0B\uFF09\u6240\u6709\u7EBF\u8DEF",
+ time:"\u5DF2\u901A\u5173 \u2713"},
+
+{id:2,name:"\u5E73\u8861\u57FA\u7840",color:"#C4A35A",dims:["\u6490"],status:"current",
+ desc:"\u628A\u201C\u77E5\u9053\u201D\u53D8\u6210\u201C\u4E0B\u610F\u8BC6\u7528\u201D\u2014\u2014\u5728\u964C\u751F\u7EBF\u8DEF\u4E0A\u4E0D\u9700\u8981\u601D\u8003\u5C31\u80FD\u9009\u62E9\u6B63\u786E\u7684\u8EAB\u4F53\u59FF\u52BF",
+ groups:[
+  {n:"\u5BF9\u89D2\u652F\u6491",items:[{n:"\u5C0D\u89D2\u652F\u6490 Diagonal",s:"l"}]},
+  {n:"\u4FA7\u8EAB\u6280\u672F",items:[{n:"\u4FA7\u8EAB\u8F6C\u80EF Side-in",s:"p",d:"07-03"},{n:"\u5916\u4FA7\u7F18\u8E29\u70B9 Outside Edge",s:"p",d:"07-11"}]},
+  {n:"\u65D7\u5F0F\u5E73\u8861",items:[
+    {n:"\u5185\u65D7 Inside Flag",s:"p",d:"07-26"},{n:"\u5916\u65D7 Outside Flag",s:"p",d:"07-26"},
+    {n:"\u80CC\u65D7 Back Flag",s:"p",d:"07-26"},{n:"\u65D7\u5F0F\u5207\u6362",s:"l"}]}
+ ],
+ criteria:"\u5728 V4 \u964C\u751F\u7EBF\u8DEF\u4E0A\u80FD\u81EA\u7136\u7EC4\u5408\u4FA7\u8EAB+\u65D7\u5F0F\uFF0C\u4E0D\u9700\u8981\u505C\u4E0B\u601D\u8003",
+ time:"\u9884\u8BA1 3-5 \u6B21\u6500\u5CA9\uFF082-4 \u5468\uFF09"},
+
+{id:3,name:"\u53CD\u4F5C\u7528\u529B",color:"#C47A5A",dims:["\u8F49"],status:"locked",
+ desc:"\u89E3\u9501\u4EF0\u89D2\u58C1\u548C\u590D\u6742\u4F53\u4F4D\u2014\u2014\u201C\u4EF0\u89D2\u597D\u96BE\u201D\u7684\u89E3\u836F",
+ groups:[
+  {n:"\u6838\u5FC3\u6280\u672F",items:[{n:"\u5782\u819D\u5F0F Drop Knee",s:"l"}]},
+  {n:"\u63A8\u6491\u6280\u672F",items:[{n:"\u5916\u6490 Stemming",s:"l"},{n:"\u4FA7\u63A8 Side Push",s:"l"},{n:"\u4FA7\u8EAB\u62C9 Lay Back",s:"l"}]},
+  {n:"\u9501\u5B9A\u6280\u672F",items:[{n:"\u9501\u819D Knee Bar",s:"l"}]}
+ ],
+ criteria:"\u5B8C\u6500\u4E00\u6761 V4 \u4EF0\u89D2\u7EBF\u8DEF\uFF0C\u8FC7\u7A0B\u4E2D\u81F3\u5C11\u4F7F\u7528 2 \u6B21 Drop Knee",
+ time:"Stage 2 \u901A\u5173\u540E\uFF0C\u518D 4-6 \u6B21\u6500\u5CA9"},
+
+{id:4,name:"\u540A\u639B\u4E0E\u63A8\u538B",color:"#8B6FA8",dims:["\u6490","\u8F49"],status:"locked",
+ desc:"\u7528\u817F\u7684\u529B\u91CF\u66FF\u4EE3\u624B\u7684\u529B\u91CF",
+ groups:[
+  {n:"\u52FE\u811A\u6280\u672F",items:[{n:"\u639B\u811A Heel Hook",s:"l"},{n:"\u811A\u5C16\u52FE Toe Hook",s:"l"}]},
+  {n:"\u8DE8\u6B65\u4E0E\u4E0B\u538B",items:[{n:"\u9AD8\u8DE8\u6B65 High Step",s:"l"},{n:"\u4E0B\u538B Mantling",s:"l"}]}
+ ],
+ criteria:"\u5728 V4 \u7EBF\u8DEF\u4E0A\u6210\u529F\u4F7F\u7528 Heel Hook \u5B8C\u6500",
+ time:"Stage 3 \u901A\u5173\u540E"},
+
+{id:5,name:"\u52A8\u6001\u8FDB\u9636",color:"#5A8FC4",dims:["\u8DF3"],status:"locked",
+ desc:"\u7CBE\u786E\u63A7\u5236\u52A8\u6001\u53D1\u529B\uFF0C\u8BE5\u9759\u5219\u9759\u8BE5\u52A8\u5219\u52A8",
+ groups:[
+  {n:"\u7CBE\u786E\u52A8\u6001",items:[{n:"\u975C\u6B62\u9EDE Deadpoint",s:"l"},{n:"\u8E66\u8DF3 Lunge",s:"l"}]},
+  {n:"\u590D\u5408\u52A8\u6001",items:[{n:"\u91CD\u529B\u52A9\u63A8 Swing-by",s:"l"},{n:"\u4E09\u8173\u8C93 Cypher",s:"p",d:"07-04"}]}
+ ],
+ criteria:"\u5728\u6700\u9AD8\u70B9\u6070\u597D\u6293\u4F4F Deadpoint\uFF0C\u8FDE\u7EED\u6210\u529F 3 \u6B21",
+ time:"Stage 3 \u901A\u5173\u540E"},
+
+{id:6,name:"\u624B\u9806\u4E0E\u6574\u5408",color:"#7A7A7A",dims:["\u6293","\u6490","\u8F49","\u8DF3"],status:"locked",
+ desc:"\u628A\u5355\u4E2A\u6280\u672F\u4E32\u6210\u6D41\u7545\u7684\u6500\u722C\u5E8F\u5217",
+ groups:[
+  {n:"\u624B\u9806\u6280\u672F",items:[
+    {n:"\u8DF3\u9EDE Bump",s:"l"},{n:"\u4EA4\u53C9\u624B Cross Move",s:"l"},
+    {n:"\u540C\u9EDE Match",s:"l"},{n:"\u63DB\u624B Change",s:"l"}]}
+ ],
+ criteria:"\u6D41\u7545\u5B8C\u6500 V5 \u7EBF\u8DEF\uFF0C\u65E0\u505C\u987F",
+ time:"\u6240\u6709 Stage \u901A\u5173\u540E"}
+];
+
+/* ===== TECHNIQUE-DIARY INDEX ===== */
+var techDiary={};
+(function(){
+  var kw={
+    "\u5B89\u5168\u843D\u5730":["\u5B89\u5168\u843D\u5730","\u843D\u5730"],
+    "\u76F4\u81C2\u639B":["\u76F4\u81C2\u639B","\u76F4\u6302","\u76F4\u6302\u624B\u81C2"],
+    "\u91CD\u5FC3\u4E0B\u79FB":["\u91CD\u5FC3\u4E0B\u79FB","\u91CD\u5FC3\u4E0B"],
+    "\u4E0B\u80A2\u53D1\u529B\u79FB\u52A8":["\u4E0B\u80A2\u53D1\u529B","\u817F\u90E8\u53D1\u529B"],
+    "\u6362\u624B\u6362\u811A":["\u6362\u624B\u6362\u811A","\u6362\u624B","\u6362\u811A"],
+    "\u6A2A\u79FB":["\u6A2A\u79FB","\u6A2A\u722C"],
+    "\u91CD\u5FC3\u5E73\u79FB":["\u91CD\u5FC3\u5E73\u79FB","\u91CD\u5FC3\u5E73"],
+    "\u52A8\u6001\u501F\u529B":["\u52A8\u6001\u501F\u529B","\u52A8\u6001"],
+    "\u4FA7\u8EAB\u8F6C\u80EF Side-in":["\u4FA7\u8EAB","\u8F6C\u80EF","Side-in","\u4FA7\u8EAB\u53D1\u529B"],
+    "\u5916\u4FA7\u7F18\u8E29\u70B9 Outside Edge":["\u5916\u4FA7\u7F18","\u8E29\u70B9","Outside Edge"],
+    "\u5185\u65D7 Inside Flag":["\u5185\u65D7","Inside Flag"],
+    "\u5916\u65D7 Outside Flag":["\u5916\u65D7","Outside Flag"],
+    "\u80CC\u65D7 Back Flag":["\u80CC\u65D7","Back Flag"],
+    "\u65D7\u5F0F\u5207\u6362":["\u65D7\u5F0F\u5207\u6362","\u65D7\u5F0F"],
+    "\u4E09\u8173\u8C93 Cypher":["\u4E09\u8173\u8C93","\u4E09\u811A\u732B","Cypher"]
+  };
+  Object.keys(kw).forEach(function(tech){
+    techDiary[tech]=[];
+    D.forEach(function(entry){
+      var match=false;
+      if(entry.skills)entry.skills.forEach(function(sk){kw[tech].forEach(function(w){if(sk.indexOf(w)>=0)match=true})});
+      if(entry.feeling)kw[tech].forEach(function(w){if(entry.feeling.indexOf(w)>=0)match=true});
+      if(match)techDiary[tech].push(entry.date.slice(5));
+    });
+  });
+})();
+
+/* ===== TAB SWITCHING ===== */
+function switchTab(t){
+  document.querySelectorAll('.tab-btn').forEach(function(b){b.classList.remove('active')});
+  document.querySelectorAll('.tab-panel').forEach(function(p){p.classList.remove('active')});
+  document.getElementById('tb-'+t).classList.add('active');
+  document.getElementById('panel-'+t).classList.add('active');
+  document.querySelectorAll('.nav-right a').forEach(function(a){a.classList.remove('active')});
+  var navEl=document.getElementById('nav-'+(t==='curriculum'?'curriculum':'diary'));
+  if(navEl)navEl.classList.add('active');
+  window.scrollTo({top:0,behavior:'smooth'});
+  setTimeout(function(){initReveal()},100);
+}
+
+/* ===== RENDER CURRICULUM ===== */
+function renderCurriculum(){
+  var el=document.getElementById('curriculum-view');
+  var totalTech=0,masteredTech=0;
+  CUR.forEach(function(st){st.groups.forEach(function(g){g.items.forEach(function(it){totalTech++;if(it.s==='m')masteredTech++})})});
+
+  var dims=[
+    {l:"\u6293 Grip",stars:2,max:5,c:"#7C9082"},
+    {l:"\u6490 Push",stars:3,max:5,c:"#C4A35A"},
+    {l:"\u8F49 Turn",stars:1,max:5,c:"#C47A5A"},
+    {l:"\u8DF3 Jump",stars:1,max:5,c:"#5A8FC4"}
+  ];
+  var dimHtml='<div class="curr-dims">'+dims.map(function(dm){
+    var starsStr='';for(var i=0;i<dm.max;i++)starsStr+=(i<dm.stars?'\u2605':'\u2606');
+    return '<div class="curr-dim"><div class="curr-dim-label">'+dm.l+'</div>'
+      +'<div class="curr-dim-bar"><div class="curr-dim-fill" style="width:'+Math.round(dm.stars/dm.max*100)+'%;background:'+dm.c+'"></div></div>'
+      +'<div class="curr-dim-stars" style="color:'+dm.c+'">'+starsStr+'</div></div>';
+  }).join('')+'</div>';
+
+  var stagesHtml=CUR.map(function(st){
+    var stTotal=0,stMastered=0;
+    st.groups.forEach(function(g){g.items.forEach(function(it){stTotal++;if(it.s==='m')stMastered++})});
+    var badge='';
+    if(st.status==='done')badge='<span class="curr-badge done">\u2713 \u5DF2\u901A\u5173</span>';
+    else if(st.status==='current')badge='<span class="curr-badge now">\u26A1 \u5F53\u524D\u9636\u6BB5</span>';
+    var cls='curr-stage';
+    if(st.status==='current')cls+=' current';
+    if(st.status==='locked')cls+=' locked-stage';
+
+    var groupsHtml=st.groups.map(function(g){
+      var itemsHtml=g.items.map(function(it){
+        var sCls=it.s==='m'?'mastered':it.s==='p'?'practicing':'locked';
+        var dateHtml=it.d?'<span class="curr-item-date">'+it.d+'</span>':'';
+        var diaryHtml='';
+        var dr=techDiary[it.n];
+        if(dr&&dr.length)diaryHtml='<span class="curr-item-diary" onclick="goToDiary(\''+dr[0]+'\')">\u{1F4D6} '+dr.length+'\u7BC7\u65E5\u8BB0</span>';
+        return '<span class="curr-item '+sCls+'"><span class="curr-item-dot" style="background:var(--'+sCls+')"></span>'+it.n+dateHtml+diaryHtml+'</span>';
+      }).join('');
+      return '<div class="curr-group"><div class="curr-group-name">'+g.n+'</div><div class="curr-items">'+itemsHtml+'</div></div>';
+    }).join('');
+
+    return '<div class="'+cls+'" style="border-left:3px solid '+st.color+'">'
+      +'<div class="curr-stage-head">'
+      +'<div class="curr-stage-badge" style="background:'+st.color+'">'+st.id+'</div>'
+      +'<div class="curr-stage-name">'+st.name+'</div>'+badge+'</div>'
+      +'<div class="curr-stage-desc">'+st.desc+'</div>'
+      +'<div class="curr-groups">'+groupsHtml+'</div>'
+      +'<div class="curr-criteria"><div class="curr-criteria-label">\u901A\u5173\u6761\u4EF6</div>'
+      +'<div class="curr-criteria-text">'+st.criteria+'</div>'
+      +'<div class="curr-time">'+st.time+'</div></div></div>';
+  }).join('');
+
+  /* Current focus panel */
+  var focusHtml='<div class="curr-focus">'
+    +'<div class="curr-focus-title">\u{1F3AF} \u672C\u5468\u7EC3\u4E60\u91CD\u70B9</div>'
+    +'<div class="curr-focus-list">'
+    +'<div class="curr-focus-item"><span class="curr-focus-tag p0">P0</span><div><div class="curr-focus-name">\u5C0D\u89D2\u652F\u6490 Diagonal Support</div><div class="curr-focus-drill">\u9009\u4E00\u6761 V2 \u7EBF\uFF0C\u5F3A\u5236\u6BCF\u6B65\u90FD\u505A\u5C0D\u89D2\u652F\u6490\u3002\u53F3\u624B\u6293\u70B9\u65F6\u5DE6\u811A\u8E29\u5B9E+\u53F3\u80EF\u8D34\u5899\uFF0C\u8EAB\u4F53\u5F62\u6210\u4E00\u6761\u4ECE\u5DE6\u624B\u5230\u5DE6\u811A\u7684\u659C\u7EBF</div></div></div>'
+    +'<div class="curr-focus-item"><span class="curr-focus-tag p0">P0</span><div><div class="curr-focus-name">\u4FA7\u8EAB\u8F6C\u80EF Side-in</div><div class="curr-focus-drill">\u5728 V3 \u7EBF\u8DEF\u4E0A\u6BCF\u4E2A\u79FB\u52A8\u70B9\u90FD\u505A\u4FA7\u8EAB\uFF0C\u505C\u7559 2 \u79D2\u786E\u8BA4\u80EF\u90E8\u8D34\u5899\u3002\u6BCF\u5468\u81F3\u5C11 1 \u6B21\u4E13\u9879\u7EC3\u4E60</div></div></div>'
+    +'<div class="curr-focus-item"><span class="curr-focus-tag p1">P1</span><div><div class="curr-focus-name">\u65D7\u5F0F\u4E13\u9879 Flagging</div><div class="curr-focus-drill">\u9009 V2 \u719F\u7EBF\uFF0C\u7528\u65D7\u5F0F\u722C 3 \u8D9F\uFF0C\u6BCF\u6B65\u90FD\u505A\u5916\u65D7\u3002\u518D\u6362\u4E00\u6761\u7EBF\u505A\u5185\u65D7\u3002\u76EE\u6807\uFF1A\u4E0D\u9700\u8981\u601D\u8003\u5C31\u80FD\u505A\u51FA\u65D7\u5F0F</div></div></div>'
+    +'</div></div>';
+
+  /* Signals panel */
+  var signalsHtml='<div class="curr-signals">'
+    +'<div class="curr-signal"><div class="curr-signal-emoji">\u{1F9E0}</div><div class="curr-signal-label">\u4FA7\u8EAB\u8F6C\u80EF</div><div class="curr-signal-text">\u201C\u60F3\u8D77\u6765\u4E86\u5C31\u80FD\u505A\u201D\u2014\u2014\u5FEB\u5230\u4E86\uFF0C\u518D\u7EC3 2-3 \u6B21</div></div>'
+    +'<div class="curr-signal"><div class="curr-signal-emoji">\u{1F6A9}</div><div class="curr-signal-label">\u65D7\u5F0F</div><div class="curr-signal-text">\u201C\u77E5\u9053\u4F46\u505A\u51FA\u6765\u4E0D\u592A\u534F\u8C03\u201D\u2014\u2014\u9700\u8981\u5206\u89E3\u7EC3\u4E60</div></div>'
+    +'<div class="curr-signal"><div class="curr-signal-emoji">\u{1F512}</div><div class="curr-signal-label">Drop Knee</div><div class="curr-signal-text">\u201C\u5B8C\u5168\u6CA1\u611F\u89C9\u201D\u2014\u2014\u8FD8\u6CA1\u5230\uFF0C\u5148\u7EC3\u524D\u7F6E\u6280\u672F</div></div>'
+    +'<div class="curr-signal"><div class="curr-signal-emoji">\u{1F4D6}</div><div class="curr-signal-label">\u5EFA\u8BAE\u8BFB\u4E66</div><div class="curr-signal-text">\u300A\u6500\u5CA9\u6280\u8853\u6559\u672C\u300B Ch3-2 \u5C0D\u89D2\u652F\u6490 (p74)\u3001\u65D7\u5F0F\u5207\u6362 (p86)</div></div>'
+    +'</div>';
+
+  el.innerHTML='<div class="curr-header">'
+    +'<div class="curr-title reveal">\u8BFE\u7A0B\u4F53\u7CFB</div>'
+    +'<div class="curr-sub reveal">\u57FA\u4E8E\u300A\u6500\u5CA9\u6280\u8853\u6559\u672C\u8A73\u7D30\u5716\u89E3\u300B\u6771\u79C0\u78EF \u00B7 \u6293\u00B7\u6490\u00B7\u8F49\u00B7\u8DF3 \u56DB\u7EF4\u4F53\u7CFB \u00B7 '+masteredTech+'/'+totalTech+' \u6280\u672F\u89E3\u9501</div>'
+    +dimHtml+'</div>'
+    +stagesHtml+focusHtml+signalsHtml;
+}
+
+function goToDiary(dateSuffix){
+  switchTab('diary');
+  setTimeout(function(){
+    var chapters=document.querySelectorAll('.chapter');
+    for(var i=0;i<D.length;i++){
+      if(D[i].date.slice(5)===dateSuffix){
+        if(chapters[i])chapters[i].scrollIntoView({behavior:'smooth',block:'start'});
+        break;
+      }
+    }
+  },200);
+}
+
+/* ===== EXISTING RENDERERS ===== */
 function fmtDate(d){var p=d.split('-');return p[0]+'\u5E74'+parseInt(p[1])+'\u6708'+parseInt(p[2])+'\u65E5'}
 function starDots(lv){var h='';for(var i=0;i<5;i++)h+='<span class="star'+(i<lv?' on':'')+'"></span>';return h}
 
@@ -661,6 +901,13 @@ function toggleTheme(){
   document.querySelector('.theme-btn').innerHTML=d?'&#9789;':'&#9788;';
 }
 
+function initReveal(){
+  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
+  document.querySelectorAll('.reveal:not(.vis)').forEach(function(el){obs.observe(el)});
+  var photoObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');photoObs.unobserve(e.target)}})},{threshold:.15});
+  document.querySelectorAll('.photo-strip:not(.vis)').forEach(function(el){photoObs.observe(el)});
+}
+
 function initScroll(){
   var nav=document.getElementById('nav');
   var btt=document.getElementById('btt');
@@ -671,12 +918,10 @@ function initScroll(){
     var pct=window.scrollY/(document.documentElement.scrollHeight-window.innerHeight)*100;
     prog.style.width=Math.min(pct,100)+'%';
   },{passive:true});
-  var obs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting)e.target.classList.add('vis')})},{threshold:.08,rootMargin:'0px 0px -30px 0px'});
-  document.querySelectorAll('.reveal').forEach(function(el){obs.observe(el)});
-  var photoObs=new IntersectionObserver(function(es){es.forEach(function(e){if(e.isIntersecting){e.target.classList.add('vis');photoObs.unobserve(e.target)}})},{threshold:.15});
-  document.querySelectorAll('.photo-strip').forEach(function(el){photoObs.observe(el)});
+  initReveal();
 }
 
+renderCurriculum();
 renderChapters();
 renderMap();
 requestAnimationFrame(function(){initScroll()});
