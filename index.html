@@ -86,6 +86,11 @@ a{color:var(--accent);text-decoration:none}
 .tab-panel{display:none}
 .tab-panel.active{display:block}
 
+/* VIDEO */
+.video-wrap{max-width:480px;margin:40px auto}
+.video-wrap video{width:100%;border-radius:8px;background:#000;display:block}
+.video-caption{font-size:12px;color:var(--stone);margin-top:8px;font-style:italic;text-align:center}
+
 /* ===== CURRICULUM STYLES ===== */
 .curr{padding:80px 32px 60px;max-width:960px;margin:0 auto}
 .curr-header{text-align:center;margin-bottom:64px}
@@ -414,15 +419,15 @@ html{transition:background .5s ease,color .5s ease}
 </nav>
 
 <section class="cover">
-  <div class="cover-watermark">X</div>
+  <div class="cover-watermark">XI</div>
   <div class="cover-eyebrow reveal">Climbing Path &middot; 2026</div>
   <h1 class="reveal reveal-delay-1">派大涛·攀岩修炼</h1>
   <div class="cover-line reveal reveal-delay-2"></div>
   <p class="cover-quote reveal reveal-delay-2">"快乐快乐，不是说自己多强，<br>是那种一点点探索一点点进步的掌控感。"</p>
   <div class="cover-meta reveal reveal-delay-3">
-    <div class="cover-meta-item"><div class="cover-meta-num">10</div><div class="cover-meta-label">训练</div></div>
+    <div class="cover-meta-item"><div class="cover-meta-num">11</div><div class="cover-meta-label">训练</div></div>
     <div class="cover-meta-divider"></div>
-    <div class="cover-meta-item"><div class="cover-meta-num">33</div><div class="cover-meta-label">天</div></div>
+    <div class="cover-meta-item"><div class="cover-meta-num">46</div><div class="cover-meta-label">天</div></div>
     <div class="cover-meta-divider"></div>
     <div class="cover-meta-item"><div class="cover-meta-num">23</div><div class="cover-meta-label">技能</div></div>
   </div>
@@ -467,6 +472,20 @@ html{transition:background .5s ease,color .5s ease}
 var P="./";
 
 var D=[
+{
+  date:"2026-08-11",num:"XI",title:"老带新，仰角重心仍需练",
+  skills:[],
+  level:3,
+  guidance:null,
+  feedback:"视频复盘：仰角攀爬时脚步偏软，最后出手瞬间身体没有'松上去'（即没有用腿部蹬伸把重心送上去），而是用手去'够'——这导致重心远离支撑点，手指负荷骤增，滑手落地。核心改进：重心重心重心、贴近墙壁、腿部发力。这正是 Stage 2 平衡基础的核心——把'知道'练成'下意识'。",
+  feeling:"今天下班带着刘总去攀岩啦，老带新，有个搭子一起玩还是更开心一些的。先看看刘总帅照！图1图2是刘总第一次攀岩上难度墙的背影，不得不感叹，力量基础才是一切啊。图3是今天上班直接穿的攀岩裤和速干衣，just 酷酷滴~~视频是刘总给我拍的爬仰角的画面，能看出来脚步还是很软，最后出手的时候，身体并没有松上去，还是手再去'够'，最终滑手失败落地也就不难理解了。重心重心重心、贴近墙壁、腿部发力！练起来",
+  goal:"仰角线路专项练习：每步强制做完整侧身或旗式后再出手，感受腿部蹬伸把重心送上去",
+  photos:["0811-liuzong-01.jpg","0811-liuzong-02.jpg","0811-outfit.jpg"],
+  captions:["刘总帅照 · 首次上难度墙","刘总背影 · 地面训练区","攀岩裤+速干衣 · 酷酷滴"],
+  breakthrough:"视频复盘看清了问题——脚步软、身体没松上去、手在'够'。重心重心重心！",
+  videos:["0811-overhang.mp4"],
+  videoCaptions:["仰角攀爬视频 · 刘总拍摄"]
+},
 {
   date:"2026-07-29",num:"X",title:"正身发力，偶遇故人",
   skills:[],
@@ -863,6 +882,7 @@ function renderChapters(){
       +'<div class="chapter-subtitle">'+t.title+'</div>'
       +'</div>'
       +renderPhotos(t)
+      +(t.videos?t.videos.map(function(v,vi){var cap=t.videoCaptions&&t.videoCaptions[vi]?'<div class="video-caption">'+t.videoCaptions[vi]+'</div>':'';return '<div class="video-wrap reveal"><video controls playsinline preload="metadata" src="'+P+v+'"></video>'+cap+'</div>'}).join(''):'')
       +'<div class="breakthrough reveal"><div class="breakthrough-label">\u4ECA\u65E5\u7A81\u7834</div><div class="breakthrough-text">'+t.breakthrough+'</div></div>'
       +'<div class="quote-block reveal"><div class="quote-mark">\u201C</div><div class="quote-text feeling-text">'+t.feeling+'</div></div>'
       +'<div class="reveal"><div class="skills-row">'+t.skills.map(function(s){return '<span class="skill-tag">'+s+'</span>'}).join('')+'</div><div class="stars">'+starDots(t.level)+'</div></div>'
