@@ -914,6 +914,15 @@ function renderPhotos(t){
   return '<div class="photo-strip reveal">'+frames+'</div>';
 }
 
+function renderVideos(t){
+  if(!t.videos||!t.videos.length)return '';
+  var html=t.videos.map(function(v,vi){
+    var cap=t.videoCaptions&&t.videoCaptions[vi]?'<div class="video-caption">'+t.videoCaptions[vi]+'</div>':'';
+    return '<div class="video-item"><video controls playsinline preload="metadata" src="'+P+v+'"></video>'+cap+'</div>';
+  }).join('');
+  return '<div class="video-row reveal">'+html+'</div>';
+}
+
 function renderChapters(){
   var el=document.getElementById('chapters');
   var html='';
@@ -939,7 +948,7 @@ function renderChapters(){
       +'<div class="chapter-subtitle">'+t.title+'</div>'
       +'</div>'
       +renderPhotos(t)
-      +(t.videos?t.videos.length?'<div class="video-row reveal">'+t.videos.map(function(v,vi){var cap=t.videoCaptions&&t.videoCaptions[vi]?'<div class="video-caption">'+t.videoCaptions[vi]+'</div>':'';return '<div class="video-item"><video controls playsinline preload="metadata" src="'+P+v+'"></video>'+cap+'</div>'}).join('')+'</div>':''':'')
+      +renderVideos(t)
       +'<div class="breakthrough reveal"><div class="breakthrough-label">\u4ECA\u65E5\u7A81\u7834</div><div class="breakthrough-text">'+t.breakthrough+'</div></div>'
       +'<div class="quote-block reveal"><div class="quote-mark">\u201C</div><div class="quote-text feeling-text">'+t.feeling+'</div></div>'
       +'<div class="reveal"><div class="skills-row">'+t.skills.map(function(s){return '<span class="skill-tag">'+s+'</span>'}).join('')+'</div><div class="stars">'+starDots(t.level)+'</div></div>'
