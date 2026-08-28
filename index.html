@@ -87,9 +87,12 @@ a{color:var(--accent);text-decoration:none}
 .tab-panel.active{display:block}
 
 /* VIDEO */
-.video-wrap{max-width:480px;margin:40px auto}
-.video-wrap video{width:100%;border-radius:8px;background:#000;display:block}
-.video-caption{font-size:12px;color:var(--stone);margin-top:8px;font-style:italic;text-align:center}
+.video-row{display:flex;gap:12px;overflow-x:auto;padding:16px 0;margin:24px 0;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
+.video-row::-webkit-scrollbar{height:4px}
+.video-row::-webkit-scrollbar-thumb{background:var(--sand);border-radius:2px}
+.video-item{flex:0 0 auto;scroll-snap-align:start}
+.video-item video{width:240px;height:180px;border-radius:8px;background:#000;display:block;object-fit:cover}
+.video-caption{font-size:11px;color:var(--stone);margin-top:6px;font-style:italic;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:240px}
 
 /* ===== CURRICULUM STYLES ===== */
 .curr{padding:80px 32px 60px;max-width:960px;margin:0 auto}
@@ -936,7 +939,7 @@ function renderChapters(){
       +'<div class="chapter-subtitle">'+t.title+'</div>'
       +'</div>'
       +renderPhotos(t)
-      +(t.videos?t.videos.map(function(v,vi){var cap=t.videoCaptions&&t.videoCaptions[vi]?'<div class="video-caption">'+t.videoCaptions[vi]+'</div>':'';return '<div class="video-wrap reveal"><video controls playsinline preload="metadata" src="'+P+v+'"></video>'+cap+'</div>'}).join(''):'')
+      +(t.videos?t.videos.length?'<div class="video-row reveal">'+t.videos.map(function(v,vi){var cap=t.videoCaptions&&t.videoCaptions[vi]?'<div class="video-caption">'+t.videoCaptions[vi]+'</div>':'';return '<div class="video-item"><video controls playsinline preload="metadata" src="'+P+v+'"></video>'+cap+'</div>'}).join('')+'</div>':''':'')
       +'<div class="breakthrough reveal"><div class="breakthrough-label">\u4ECA\u65E5\u7A81\u7834</div><div class="breakthrough-text">'+t.breakthrough+'</div></div>'
       +'<div class="quote-block reveal"><div class="quote-mark">\u201C</div><div class="quote-text feeling-text">'+t.feeling+'</div></div>'
       +'<div class="reveal"><div class="skills-row">'+t.skills.map(function(s){return '<span class="skill-tag">'+s+'</span>'}).join('')+'</div><div class="stars">'+starDots(t.level)+'</div></div>'
