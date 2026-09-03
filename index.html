@@ -10,26 +10,26 @@
 <style>
 *,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
 :root{
-  --cream:#FDFBF7;--espresso:#2C1810;--sage:#7C9082;--sage-light:#A8BBA0;
-  --stone:#9A9A9A;--sand:#D4C5B2;--sand-light:#EDE8E0;
-  --bg:var(--cream);--bg2:#fff;--bg3:var(--sand-light);
-  --text:var(--espresso);--text2:#5C4A3A;--text3:var(--stone);
-  --accent:var(--sage);--accent-bg:rgba(124,144,130,.08);
-  --border:rgba(44,24,16,.06);--shadow-s:0 1px 8px rgba(44,24,16,.04);
-  --shadow-m:0 4px 24px rgba(44,24,16,.06);--shadow-l:0 12px 48px rgba(44,24,16,.08);
+  --cream:#0B0F1A;--espresso:#F0EDE6;--sage:#D4A853;--sage-light:#E8C97A;
+  --stone:#8B8578;--sand:#2A3040;--sand-light:#141B2D;
+  --bg:var(--cream);--bg2:#0F1525;--bg3:var(--sand-light);
+  --text:var(--espresso);--text2:#A09888;--text3:var(--stone);
+  --accent:var(--sage);--accent-bg:rgba(212,168,83,.10);
+  --border:rgba(212,168,83,.10);--shadow-s:0 1px 8px rgba(0,0,0,.2);
+  --shadow-m:0 4px 24px rgba(0,0,0,.3);--shadow-l:0 12px 48px rgba(0,0,0,.4);
   --serif:'Playfair Display',Georgia,'Noto Serif SC',serif;
   --sans:'Manrope',-apple-system,'SF Pro Text','PingFang SC','Noto Sans SC',system-ui,sans-serif;
-  --mastered:var(--sage);--practicing:#C4A35A;--locked:var(--sand);
+  --mastered:var(--sage);--practicing:#E8735A;--locked:var(--sand);
   --ease-out-expo:cubic-bezier(0.16,1,0.3,1);
   --ease-out-quart:cubic-bezier(0.25,1,0.5,1);
 }
 [data-theme="dark"]{
-  --cream:#0A0A09;--espresso:#EDE9E3;--sand-light:#1A1A18;
-  --bg:var(--cream);--bg2:#141413;--bg3:var(--sand-light);
-  --text:var(--espresso);--text2:#A09A92;--text3:#6B665E;
-  --border:rgba(237,233,227,.06);--shadow-s:0 1px 8px rgba(0,0,0,.2);
-  --shadow-m:0 4px 24px rgba(0,0,0,.3);--shadow-l:0 12px 48px rgba(0,0,0,.4);
-  --accent-bg:rgba(124,144,130,.12);
+  --cream:#080C16;--espresso:#F0EDE6;--sand-light:#111828;
+  --bg:var(--cream);--bg2:#0C1220;--bg3:var(--sand-light);
+  --text:var(--espresso);--text2:#A09888;--text3:#6B665E;
+  --border:rgba(212,168,83,.08);--shadow-s:0 1px 8px rgba(0,0,0,.3);
+  --shadow-m:0 4px 24px rgba(0,0,0,.4);--shadow-l:0 12px 48px rgba(0,0,0,.5);
+  --accent-bg:rgba(212,168,83,.08);
 }
 html{scroll-behavior:smooth;background:var(--bg);color:var(--text);
   -webkit-font-smoothing:antialiased;-moz-osx-font-smoothing:grayscale;
@@ -46,11 +46,11 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 /* NAV - Floating Island */
 .nav{position:fixed;top:24px;left:50%;transform:translateX(-50%);z-index:100;
   display:flex;align-items:center;gap:32px;padding:12px 28px;
-  background:rgba(253,251,247,.72);backdrop-filter:blur(20px) saturate(1.4);
+  background:rgba(11,15,26,.80);backdrop-filter:blur(20px) saturate(1.4);
   -webkit-backdrop-filter:blur(20px) saturate(1.4);
   border:1px solid var(--border);border-radius:100px;
   box-shadow:var(--shadow-s);transition:all .5s var(--ease-out-expo)}
-[data-theme="dark"] .nav{background:rgba(10,10,9,.72)}
+[data-theme="dark"] .nav{background:rgba(8,12,22,.85)}
 .nav.scrolled{top:16px;box-shadow:var(--shadow-m)}
 .nav-brand{font-family:var(--serif);font-size:14px;font-weight:400;letter-spacing:.04em;color:var(--text2)}
 .nav-right{display:flex;align-items:center;gap:24px}
@@ -66,13 +66,13 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
   padding:80px 32px 60px;text-align:center;position:relative}
 .cover-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   font-family:var(--serif);font-size:clamp(200px,35vw,400px);font-weight:400;
-  color:var(--border);opacity:.3;pointer-events:none;letter-spacing:-.05em}
+  color:var(--accent);opacity:.04;pointer-events:none;letter-spacing:-.05em}
 .cover-eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--stone);
   font-weight:500;margin-bottom:32px;opacity:0;transform:translateY(20px);animation:fadeUp .8s var(--ease-out-expo) .2s forwards}
 .cover h1{font-family:var(--serif);font-size:clamp(48px,10vw,96px);font-weight:400;
   letter-spacing:-.03em;line-height:1;margin-bottom:40px;color:var(--text);
   opacity:0;transform:translateY(30px);animation:fadeUp 1s var(--ease-out-expo) .4s forwards}
-.cover-line{width:48px;height:1px;background:var(--sand);margin:0 auto 40px;
+.cover-line{width:48px;height:1px;background:var(--accent);opacity:.4;margin:0 auto 40px;
   opacity:0;transform:scaleX(0);animation:scaleX 1s var(--ease-out-expo) .6s forwards}
 .cover-quote{font-family:var(--serif);font-size:clamp(18px,3vw,24px);font-style:italic;
   color:var(--text2);line-height:1.6;max-width:560px;margin:0 auto 56px;
@@ -107,9 +107,9 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 /* VIDEO - Horizontal Scroll Row */
 .video-row{display:flex;gap:16px;overflow-x:auto;padding:20px 0;margin:32px 0;scroll-snap-type:x mandatory;-webkit-overflow-scrolling:touch}
 .video-row::-webkit-scrollbar{height:3px}
-.video-row::-webkit-scrollbar-thumb{background:var(--sand);border-radius:2px}
+.video-row::-webkit-scrollbar-thumb{background:var(--accent);opacity:.3;border-radius:2px}
 .video-item{flex:0 0 auto;scroll-snap-align:start}
-.video-item video{width:280px;height:210px;border-radius:12px;background:#000;display:block;object-fit:cover}
+.video-item video{width:280px;height:210px;border-radius:12px;background:#060A12;display:block;object-fit:cover}
 .video-caption{font-size:11px;color:var(--stone);margin-top:8px;font-style:italic;text-align:center;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:280px}
 
 /* CURRICULUM */
@@ -119,7 +119,7 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 .curr-sub{font-size:14px;color:var(--stone);letter-spacing:.04em;margin-bottom:48px}
 
 /* Stage cards - Double Bezel */
-.curr-stage{background:var(--bg2);border:1px solid var(--border);border-radius:24px;padding:32px 32px 28px;
+.curr-stage{background:var(--bg3);border:1px solid var(--border);border-radius:24px;padding:32px 32px 28px;
   margin-bottom:28px;box-shadow:var(--shadow-s);transition:transform .6s var(--ease-out-expo),box-shadow .6s var(--ease-out-expo)}
 .curr-stage:hover{transform:translateY(-4px);box-shadow:var(--shadow-m)}
 .curr-stage.current{border-color:var(--practicing);border-width:1.5px}
@@ -130,7 +130,7 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 .curr-stage-name{font-family:var(--serif);font-size:22px;font-weight:400}
 .curr-badge{font-size:10px;padding:4px 12px;border-radius:100px;letter-spacing:.08em;font-weight:500}
 .curr-badge.done{background:var(--accent-bg);color:var(--mastered)}
-.curr-badge.now{background:rgba(196,163,90,.12);color:var(--practicing)}
+.curr-badge.now{background:rgba(232,115,90,.12);color:var(--practicing)}
 .curr-stage-desc{font-size:13px;color:var(--stone);margin-bottom:20px;line-height:1.7}
 .curr-groups{display:flex;flex-direction:column;gap:16px;margin-bottom:20px}
 .curr-group-name{font-size:10px;letter-spacing:.14em;text-transform:uppercase;color:var(--stone);font-weight:500;margin-bottom:10px}
@@ -154,8 +154,8 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 .curr-focus-list{display:flex;flex-direction:column;gap:16px}
 .curr-focus-item{display:flex;gap:14px;align-items:flex-start}
 .curr-focus-tag{font-size:10px;padding:3px 10px;border-radius:100px;font-weight:600;letter-spacing:.06em;flex-shrink:0;margin-top:2px}
-.curr-focus-tag.p0{background:rgba(124,144,130,.12);color:var(--mastered)}
-.curr-focus-tag.p1{background:rgba(196,163,90,.12);color:var(--practicing)}
+.curr-focus-tag.p0{background:rgba(212,168,83,.12);color:var(--mastered)}
+.curr-focus-tag.p1{background:rgba(232,115,90,.12);color:var(--practicing)}
 .curr-focus-tag.p2{background:var(--border);color:var(--stone)}
 .curr-focus-name{font-size:14px;font-weight:500;margin-bottom:4px}
 .curr-focus-drill{font-size:13px;color:var(--text2);line-height:1.6}
@@ -186,7 +186,7 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 
 /* Quote Block */
 .quote-block{position:relative;padding:40px 0 40px 32px;margin:48px 0}
-.quote-mark{position:absolute;left:0;top:0;font-family:var(--serif);font-size:72px;color:var(--sand);line-height:1;opacity:.5}
+.quote-mark{position:absolute;left:0;top:0;font-family:var(--serif);font-size:72px;color:var(--accent);line-height:1;opacity:.15}
 .quote-text{font-family:var(--serif);font-size:clamp(16px,2.5vw,20px);color:var(--text2);line-height:1.8;font-style:italic}
 .feeling-text{white-space:pre-wrap}
 
@@ -196,14 +196,14 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 
 /* Stars */
 .stars{display:flex;gap:6px;margin-top:16px}
-.star{width:8px;height:8px;border-radius:50%;background:var(--sand)}
+.star{width:8px;height:8px;border-radius:50%;background:var(--sand);opacity:.4}
 .star.filled{background:var(--accent)}
 
 /* Guidance Toggle */
 .guidance-wrap{margin:32px 0;border:1px solid var(--border);border-radius:20px;overflow:hidden;transition:all .4s var(--ease-out-expo)}
 .guidance-toggle{width:100%;padding:20px 24px;background:var(--bg3);border:none;cursor:pointer;
   display:flex;align-items:center;justify-content:space-between;font-family:var(--sans);font-size:13px;color:var(--text2);font-weight:500;transition:background .3s var(--ease-out-expo)}
-.guidance-toggle:hover{background:var(--sand-light)}
+.guidance-toggle:hover{background:rgba(212,168,83,.06)}
 .chevron{transition:transform .4s var(--ease-out-expo)}
 .guidance-wrap.open .chevron{transform:rotate(180deg)}
 .guidance-body{max-height:0;overflow:hidden;transition:max-height .5s var(--ease-out-expo)}
@@ -216,7 +216,7 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 .coach-text{font-size:14px;color:var(--text2);line-height:1.8}
 
 /* Goal */
-.goal-block{background:var(--accent-bg);border:1px solid rgba(124,144,130,.15);border-radius:20px;padding:28px;margin:32px 0}
+.goal-block{background:var(--accent-bg);border:1px solid rgba(212,168,83,.15);border-radius:20px;padding:28px;margin:32px 0}
 .goal-label{font-size:10px;letter-spacing:.15em;text-transform:uppercase;color:var(--accent);font-weight:500;margin-bottom:12px}
 .goal-text{font-size:14px;color:var(--text);line-height:1.7}
 
@@ -233,16 +233,16 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 #map-container{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:24px}
 
 /* Lightbox */
-.lightbox{position:fixed;inset:0;z-index:200;background:rgba(0,0,0,.92);backdrop-filter:blur(20px);
+.lightbox{position:fixed;inset:0;z-index:200;background:rgba(6,10,18,.95);backdrop-filter:blur(20px);
   display:none;align-items:center;justify-content:center;cursor:pointer;opacity:0;transition:opacity .4s var(--ease-out-expo)}
 .lightbox.active{display:flex;opacity:1}
 .lightbox img{max-width:90vw;max-height:90vh;border-radius:12px;object-fit:contain}
-.lb-close{position:absolute;top:24px;right:32px;width:40px;height:40px;border:none;background:rgba(255,255,255,.1);
+.lb-close{position:absolute;top:24px;right:32px;width:40px;height:40px;border:none;background:rgba(212,168,83,.15);
   border-radius:50%;color:#fff;font-size:24px;cursor:pointer;display:flex;align-items:center;justify-content:center;transition:background .3s var(--ease-out-expo)}
-.lb-close:hover{background:rgba(255,255,255,.2)}
+.lb-close:hover{background:rgba(212,168,83,.25)}
 
 /* Back to Top */
-.btt{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border:none;background:var(--bg2);
+.btt{position:fixed;bottom:32px;right:32px;width:44px;height:44px;border:none;background:var(--bg3);
   border:1px solid var(--border);border-radius:50%;color:var(--text2);font-size:18px;cursor:pointer;
   box-shadow:var(--shadow-m);opacity:0;pointer-events:none;transition:all .4s var(--ease-out-expo);z-index:90}
 .btt.visible{opacity:1;pointer-events:auto}
@@ -367,8 +367,8 @@ var D=[
   feedback:null,
   feeling:"今天在万象汇抱石区死磕一条线路，反复试了半小时。旗式、侧身、反肩各种技巧都用了不少，只完攀过一次，摔了好几次，略挫败。但下次必须拿下！！最近爬难度比较多，发现自己在脚法和手法上，还是需要打牢基本功。这条抱石线算是个小小的考验，把最近学的技巧都实践了一遍。虽然摔得有点惨，但能感觉到自己在进步，至少知道该用什么技术去解决问题了。",
   goal:"拿下这条抱石线，继续巩固脚法手法基本功",
-  photos:["0826-send.png","0826-send-02.png"],
-  captions:["完攀瞬间 · 半小时只此一次","完攀定格 · 下次必须拿下"],
+  photos:["0826-send.png"],
+  captions:["完攀瞬间 · 半小时只此一次，下次必须拿下"],
   breakthrough:"旗式、侧身、反肩全用上了——半小时磕线，摔了好几次，但下次必须拿下！",
   videos:["0826-boulder-video.mp4","0826-attempt-01.mp4","0826-attempt-02.mp4","0826-attempt-03.mp4","0826-attempt-04.mp4"],
   videoCaptions:["抱石线完整尝试","尝试过程 · 01","尝试过程 · 02","尝试过程 · 03","尝试过程 · 04"]
