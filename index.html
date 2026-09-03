@@ -786,7 +786,8 @@ function switchTab(t){
   document.getElementById('panel-'+t).classList.add('active');
   document.getElementById('nav-'+t).classList.add('active');
   document.querySelectorAll('.nav-right a').forEach(function(a){if(a.id!=='nav-'+t)a.classList.remove('active')});
-  if(t==='diary'){setTimeout(function(){window.scrollTo({top:document.getElementById('tab-bar').offsetTop,behavior:'smooth'})},50)}
+  if(t==='diary'){setTimeout(function(){window.scrollTo({top:document.getElementById('tab-bar').offsetTop,behavior:'smooth'});onScroll()},50)}
+  else{setTimeout(onScroll,50)}
 }
 
 function goToDiary(dateSuffix){
@@ -822,12 +823,12 @@ function toggleTheme(){
 // Scroll effects
 var nav=document.getElementById('nav');
 var btt=document.getElementById('btt');
-var reveals=document.querySelectorAll('.reveal');
 
 function onScroll(){
   var y=window.scrollY;
   if(y>100)nav.classList.add('scrolled');else nav.classList.remove('scrolled');
   if(y>600)btt.classList.add('visible');else btt.classList.remove('visible');
+  var reveals=document.querySelectorAll('.reveal:not(.visible)');
   reveals.forEach(function(el){
     var rect=el.getBoundingClientRect();
     if(rect.top<window.innerHeight*0.88)el.classList.add('visible');
