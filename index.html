@@ -61,23 +61,17 @@ body::before{content:'';position:fixed;inset:0;z-index:50;pointer-events:none;
 /* COVER */
 .cover{min-height:100dvh;display:flex;flex-direction:column;justify-content:center;align-items:center;
   padding:80px 32px 60px;text-align:center;position:relative;overflow:hidden;
-  background:
-    radial-gradient(ellipse 120% 80% at 25% 15%,rgba(212,168,83,.10) 0%,transparent 55%),
-    radial-gradient(ellipse 90% 70% at 75% 75%,rgba(232,115,90,.07) 0%,transparent 50%),
-    radial-gradient(ellipse 60% 50% at 50% 40%,rgba(78,205,196,.05) 0%,transparent 60%),
-    radial-gradient(ellipse 200% 120% at 50% 100%,rgba(167,139,250,.04) 0%,transparent 50%),
-    linear-gradient(160deg,#080C16 0%,#0E1525 25%,#0B1020 50%,#111D30 75%,#080C16 100%)}
-.cover::before{content:'';position:absolute;inset:0;
-  background:repeating-linear-gradient(128deg,transparent,transparent 50px,rgba(212,168,83,.018) 50px,rgba(212,168,83,.018) 51px),
-    repeating-linear-gradient(52deg,transparent,transparent 70px,rgba(232,115,90,.012) 70px,rgba(232,115,90,.012) 71px),
-    repeating-linear-gradient(200deg,transparent,transparent 90px,rgba(78,205,196,.008) 90px,rgba(78,205,196,.008) 91px);
-  z-index:0}
+  background:#0B0F1A}
+.cover::before{content:'';position:absolute;inset:-80px;
+  background:url('./0722-wall-01.jpg') center/cover no-repeat;
+  filter:blur(24px) brightness(.55) saturate(1.5);
+  transform:scale(1.15);z-index:0}
 .cover::after{content:'';position:absolute;inset:0;
-  background:linear-gradient(180deg,rgba(8,12,22,.15) 0%,rgba(8,12,22,.45) 45%,var(--cream) 100%);z-index:1}
+  background:linear-gradient(180deg,rgba(11,15,26,.35) 0%,rgba(11,15,26,.55) 45%,var(--cream) 100%);z-index:1}
 .cover>*{position:relative;z-index:2}
 .cover-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);
   font-family:var(--serif);font-size:clamp(200px,35vw,400px);font-weight:700;
-  color:var(--accent);opacity:.04;pointer-events:none;letter-spacing:-.05em;z-index:1}
+  color:var(--accent);opacity:.06;pointer-events:none;letter-spacing:-.05em;z-index:1}
 .cover-eyebrow{font-size:10px;letter-spacing:.25em;text-transform:uppercase;color:var(--stone);
   font-weight:500;margin-bottom:32px;opacity:0;transform:translateY(20px);animation:fadeUp .8s var(--ease-out-expo) .2s forwards}
 .cover h1{font-family:var(--serif);font-size:clamp(48px,10vw,96px);font-weight:400;
